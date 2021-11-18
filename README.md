@@ -1,5 +1,21 @@
 # Subject
 
+## TODO
+### Pre-setting
+- [x] libraries setting
+- [ ] Libft norminette v3 확인
+
+### 초기 구동
+- [ ] prompt - 절대경로, 상대경로
+- [ ] save_history - 환경변수 저장할 자료구조
+- [ ] 명령어 에러 판단
+
+### 루프 동작
+- [ ] 파스
+- [ ] Pipe & Redirection
+- [ ] builtin & command
+- [ ] malloc free
+
 ## Goal
 
 bash shell 기능을 모방한 minishell 만들기
@@ -84,7 +100,7 @@ bash shell 기능을 모방한 minishell 만들기
 6. interrupt
     1. **ctrl-C** print a new prompt on a newline.
     2. **ctrl-D** exit the shell.
-    3. **ctrl-\** do nothing.
+    3. **ctrl-\ ** do nothing.
 
 ---
 
