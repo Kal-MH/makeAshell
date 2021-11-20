@@ -1,10 +1,6 @@
 # Subject
 
 ## TODO
-### Pre-setting
-- [x] libraries setting
-- [ ] Libft norminette v3 확인
-
 ### 초기 구동
 - [ ] prompt - 절대경로, 상대경로
 - [ ] save_history - 환경변수 저장할 자료구조
