@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:03:47 by napark            #+#    #+#             */
-/*   Updated: 2021/12/18 00:57:08 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/18 01:56:15 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,26 @@ static int	repinterprete_env_vars(t_par_tok *par_toks[], t_exp_tok *exp_toks[])
 	return (EXIT_SUCCESS);
 }
 
+/*
+ * handle_tokens_and_or
+ * -1 : No such case = continue the while loop (handle_tokens)
+ */
+
+static int	handle_tokens_and_or(t_exp_tok *exp_toks[],
+		t_par_tok *par_toks[], int i)
+{
+	if ((par_toks[i]->type == and && get_err_code() != EXIT_SUCCESS) \
+	|| (par_toks[i]->type == or && get_err_code() == EXIT_SUCCESS))
+	{
+		set_err_code(EXIT_FAILURE);
+		return (EXIT_SUCCESS);
+	}
+	if (repinterprete_env_vars(&par_toks[i + 1],
+			&exp_toks[i + 1]) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	return (-1);
+}
+
 static int	handle_tokens(t_exp_tok *exp_toks[], t_par_tok *par_toks[])
 {
 	int	i;
@@ -46,15 +66,8 @@ static int	handle_tokens(t_exp_tok *exp_toks[], t_par_tok *par_toks[])
 		pipe_type = set_pipe_type(par_toks, i);
 		if (par_toks[i]->type == and || par_toks[i]->type == or)
 		{
-			if ((par_toks[i]->type == and && get_err_code() != EXIT_SUCCESS) \
-			|| (par_toks[i]->type == or && get_err_code() == EXIT_SUCCESS))
-			{
-				set_err_code(EXIT_FAILURE);
-				return (EXIT_SUCCESS);
-			}
-			if (repinterprete_env_vars(&par_toks[i + 1],
-					&exp_toks[i + 1]) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
+			if (handle_tokens_and_or(exp_toks, par_toks, i) != -1)
+				return (handle_tokens_and_or(exp_toks, par_toks, i));
 		}
 		else if (par_toks[i]->type == subshell)
 			set_err_code(handle_subshell(exp_toks[i]->cmd[0]));

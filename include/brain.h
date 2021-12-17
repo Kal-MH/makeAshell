@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:16:20 by napark            #+#    #+#             */
-/*   Updated: 2021/12/18 00:56:01 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/18 03:11:13 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int			execute_cmd(t_exp_tok *exp_tok, char *abs_cmd_path);
 bool		is_inbuilt(char *cmd);
 
 // EXPANDER_UTILS
-int			free_exp_toks(t_exp_tok *exp_toks[], int exit_statue);
+int			free_exp_toks(t_exp_tok *exp_toks[], int exit_status);
 size_t		get_tok_size(t_par_tok *par_toks[]);
 int			get_tokens_expander(t_par_tok *par_toks[]);
 char		*get_subshell_cmd(char *cmd);

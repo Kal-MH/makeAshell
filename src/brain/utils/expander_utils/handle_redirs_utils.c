@@ -6,13 +6,28 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 01:40:33 by napark            #+#    #+#             */
-/*   Updated: 2021/12/17 21:59:17 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/18 02:55:16 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "brain.h"
 #include "expander_utils.h"
+
+static int	open_in_fd(t_par_tok *par_tok, int *i, int *fd,
+		int *heredeoc_fd)
+{
+	if (par_tok->redir_type[is_in])
+		*fd = open(par_tok->in[*i], O_RDONLY);
+	else if (par_tok->redir_type[is_in_heredoc])
+		*fd = *heredeoc_fd;
+	if (*fd == -1)
+	{
+		perror("ERROR");
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
 
 static int	open_in(t_par_tok *par_tok, t_exp_tok *exp_tok)
 {
@@ -27,15 +42,8 @@ static int	open_in(t_par_tok *par_tok, t_exp_tok *exp_tok)
 	while (par_tok->redir_type[is_in] || par_tok->redir_type[is_in_heredoc])
 	{
 		i++;
-		if (par_tok->redir_type[is_in])
-			fd = open(par_tok->in[i], O_RDONLY);
-		else if (par_tok->redir_type[is_in_heredoc])
-			fd = heredeoc_fd;
-		if (fd == -1)
-		{
-			perror("ERROR");
+		if (open_in_fd(par_tok, &i, &fd, &heredeoc_fd) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		}
 		if (par_tok->in[i + 1] == NULL)
 			break ;
 		if (fd != heredeoc_fd && fd != 0 && fd != 1)
@@ -44,6 +52,22 @@ static int	open_in(t_par_tok *par_tok, t_exp_tok *exp_tok)
 	}
 	exp_tok->in = fd;
 	return (EXIT_SUCCESS);
+}
+
+static void	open_out_fd(t_par_tok *par_tok, int *i, int *fd)
+{
+	if (par_tok->redir_type[is_out]
+		&& ft_strcmp(par_tok->out[*i], ">") == 0)
+	{
+		(*i) += 1;
+		*fd = open(par_tok->out[*i], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	}
+	else if (par_tok->redir_type[is_out_append]
+		&& ft_strcmp(par_tok->out[*i], ">>") == 0)
+	{
+		(*i) += 1;
+		*fd = open(par_tok->out[*i], O_RDWR | O_CREAT | O_APPEND, 0644);
+	}
 }
 
 static int	open_out(t_par_tok *par_tok, t_exp_tok *exp_tok)
@@ -55,12 +79,7 @@ static int	open_out(t_par_tok *par_tok, t_exp_tok *exp_tok)
 	fd = 1;
 	while (par_tok->redir_type[is_out] || par_tok->redir_type[is_out_append])
 	{
-		if (par_tok->redir_type[is_out]
-			&& ft_strcmp(par_tok->out[i++], ">") == 0)
-			fd = open(par_tok->out[i], O_RDWR | O_CREAT | O_TRUNC, 0644);
-		else if (par_tok->redir_type[is_out_append]
-			&& ft_strcmp(par_tok->out[i++], ">>") == 0)
-			fd = open(par_tok->out[i], O_RDWR | O_CREAT | O_APPEND, 0644);
+		open_out_fd(par_tok, &i, &fd);
 		if (fd == -1)
 		{
 			perror("ERROR");
