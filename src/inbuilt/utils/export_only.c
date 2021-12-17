@@ -6,14 +6,13 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:09:59 by napark            #+#    #+#             */
-/*   Updated: 2021/12/17 21:11:25 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 23:35:18 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "env_var_utils.h"
 #include "inbuilt_utils.h"
-
 
 static int	ft_export_exit(char ***array, bool exit_status)
 {
@@ -22,7 +21,6 @@ static int	ft_export_exit(char ***array, bool exit_status)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
-
 
 static int	ft_sort_loop(char **env_var_cpy, int i, int j)
 {

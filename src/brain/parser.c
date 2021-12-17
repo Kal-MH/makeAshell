@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:31:02 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:38:22 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 21:55:02 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,6 @@
 
 #define NO_OF_ITERATORS 5
 
-/**
- * @brief  Trys to get correct current parser token
- * @note   Helper function of get_tokens
- * @param  *lex_toks[]:
- * @param  *par_toks[]: 
- * @param  *iter: 
- * @retval int to indicate exit status
- */
 static int	get_par_tok(char *lex_toks[], t_par_tok *par_toks[], t_iter *iter)
 {
 	int	tmp;
@@ -44,12 +36,6 @@ static int	get_par_tok(char *lex_toks[], t_par_tok *par_toks[], t_iter *iter)
 	return (EXIT_SUCCESS);
 }
 
-/**
- * @brief  Trys to create correct tokens for expander
- * @note   
- * @param  *lex_toks[]: Tokens from lexer to create parser tokens from
- * @retval int to indicate exit status
- */
 static int	get_tokens(char *lex_toks[])
 {
 	t_par_tok	**par_toks;
@@ -93,98 +79,12 @@ static char	**interprete_env_vars(char *lex_toks[])
 	return (lex_toks);
 }
 
-void prnt_token(t_par_tok *tok[])
-{
-	char *white = "\033[0;37m";
-	char *red = "\033[0;31m";
-	char *green = "\033[0;32m";
-	char *purp = "\033[0;35m";
-	char *boldred = "\033[1;31m";
-	char *boldwhite = "\033[1;37m";
-	for (int i = 0; tok[i]; i++)
-	{
-		printf("%sToken [%d]:\n%s", boldwhite, i, white);
-		if (tok[i]->type != 0)
-			printf("%sType: %s", purp, white);
-		switch (tok[i]->type)
-		{
-			case 1:
-				printf("subshell\n");
-				break;
-			case 2:
-				printf("%s&&%s\n", boldwhite, white);
-				break;
-			case 3:
-				printf("%s||%s\n", boldwhite, white);
-				break;
-			default:
-				if (tok[i]->type != 0)
-					printf("%s%s%d is unsepcified\n%s", boldred, red, tok[i]->type, white);
-				break;
-		}
-		for (int m = 0; m < 5; m++)
-			if (tok[i]->redir_type[m])
-			{
-				printf("%sRedirections:\n%s", purp, white);
-				break;
-			}
-		for (int m = 0; m < 5; m++)
-		{
-			if (tok[i]->redir_type[m])
-			{
-				switch (m)
-				{
-					case 0:
-						printf("Is Pipe:\t");
-						break;
-					case 1:
-						printf("Is In:\t\t");
-						break;
-					case 2:
-						printf("Is Heredoc:\t");
-						break;
-					case 3:
-						printf("Is Out:\t\t");
-						break;
-					case 4:
-						printf("Is Out-Append:\t");
-						break;
-					default:
-						break;
-				}
-				printf("%strue\n%s", green, white);
-			}
-		}
-		if (tok[i]->cmd)
-		{
-			printf("%sCommand:\n%s", purp, white);
-			for (int j = 0; tok[i]->cmd && tok[i]->cmd[j]; j++)
-				printf("%s\t", tok[i]->cmd[j]);
-			printf("\n");
-		}
-		if (tok[i]->in)
-		{
-			printf("%sIn Redirections:\n%s", purp, white);
-			for (int k = 0; tok[i]->in && tok[i]->in[k]; k++)
-				printf("%s\t", tok[i]->in[k]);
-			printf("\n");
-		}
-		if (tok[i]->out)
-		{
-			printf("%sOut Redirections:\n%s", purp, white);
-			for (int l = 0; tok[i]->out && tok[i]->out[l]; l++)
-				printf("%s\t", tok[i]->out[l]);
-			printf("\n");
-		}
-		printf("\n");
-	}
-}
-
 int	parser(char *lexer_tokens[])
 {
-	t_par_tok	**tokens = NULL;
+	t_par_tok	**tokens;
 	int			exit_code;
 
+	tokens = NULL;
 	lexer_tokens = interprete_env_vars(lexer_tokens);
 	if (lexer_tokens == NULL)
 		return (EXIT_FAILURE);
@@ -195,6 +95,5 @@ int	parser(char *lexer_tokens[])
 	if (exit_code == EXIT_SYNTAX_ERROR)
 		return (EXIT_SUCCESS);
 	tokens = get_par_toks();
-	// prnt_token(tokens);
 	return (free_par_toks(tokens, expander(tokens)));
 }

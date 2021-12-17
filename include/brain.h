@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:16:20 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:48:12 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/18 00:56:01 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,22 @@ int			lexer(char *line);
 int			parser(char *lexer_tokens[]);
 int			expander(t_par_tok *parser_tokens[]);
 int			executor(t_exp_tok *exp_tok);
+
+// EXECUTOR_UTILS
+bool		is_valid_cmd(char *cmd, char **abs_cmd_path);
+int			execute_cmd(t_exp_tok *exp_tok, char *abs_cmd_path);
+bool		is_inbuilt(char *cmd);
+
+// EXPANDER_UTILS
+int			free_exp_toks(t_exp_tok *exp_toks[], int exit_statue);
+size_t		get_tok_size(t_par_tok *par_toks[]);
+int			get_tokens_expander(t_par_tok *par_toks[]);
+char		*get_subshell_cmd(char *cmd);
+
+// EXPANDER_UTILS2
+int			handle_subshell(char *cmd);
+bool		is_redir_expander(t_par_tok *par_tok);
+char		*interprete_env_var(char *lex_tok);
 
 // BRAIN UTILS
 

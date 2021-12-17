@@ -6,14 +6,13 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 01:41:07 by napark            #+#    #+#             */
-/*   Updated: 2021/12/17 21:10:01 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 21:59:53 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "brain.h"
 #include "expander_utils.h"
-
 
 static char	*get_heredoc(t_par_tok *par_tok)
 {
@@ -29,12 +28,6 @@ static char	*get_heredoc(t_par_tok *par_tok)
 	return (NULL);
 }
 
-/**
- * @brief  Waits in readline-prompt as long as heredoc is not typed
- * @note
- * @param  *par_tok:
- * @retval int to indicate success or failure
- */
 int	wait_for_heredoc(t_par_tok *par_tok, t_exp_tok *exp_tok)
 {
 	char	*buf;
@@ -46,10 +39,6 @@ int	wait_for_heredoc(t_par_tok *par_tok, t_exp_tok *exp_tok)
 		perror("Error");
 		return (EXIT_FAILURE);
 	}
-	// remove after testing until next //
-	// fprintf(stderr, "read end of the pipe: %d\n", end[0]);
-	// fprintf(stderr, "write end of the pipe: %d\n", end[1]);
-	//
 	exp_tok->in = end[0];
 	heredoc = get_heredoc(par_tok);
 	if (heredoc == NULL)
@@ -85,12 +74,6 @@ int	wait_for_heredoc(t_par_tok *par_tok, t_exp_tok *exp_tok)
 	return (EXIT_SUCCESS);
 }
 
-/**
- * @brief  Searches for heredoc in par_toks and waits if found
- * @note
- * @param  *par_toks[]:
- * @retval int to indicate success or failure
- */
 int	check_for_heredoc(t_par_tok *par_toks[])
 {
 	int	i;

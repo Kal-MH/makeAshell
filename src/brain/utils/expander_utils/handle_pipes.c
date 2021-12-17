@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 01:39:48 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:42:22 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 21:56:24 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,12 @@ int	handle_pipes(t_exp_tok *exp_tok, int pipe_type)
 	static int	last_pipe_out;
 	int			end[2];
 
-	// fprintf(stderr, "the piped cmd is %s\n", exp_tok->cmd[0]);
-	// fprintf(stderr, "last_pipe_out=%d\n", last_pipe_out);
 	if (pipe_type == -1)
 	{
 		if (last_pipe_out != 0 && last_pipe_out != 1)
 		{
 			close(last_pipe_out);
-			ft_putstr_fd("something with pipes went wrong pipe_type=-1\n", 2);//remove pipes_type after debugging
+			ft_putstr_fd("something with pipes went wrong pipe_type=-1\n", 2);
 			return (EXIT_FAILURE);
 		}
 		return (EXIT_SUCCESS);
@@ -35,7 +33,7 @@ int	handle_pipes(t_exp_tok *exp_tok, int pipe_type)
 	{
 		if (last_pipe_out == 0)
 		{
-			ft_putstr_fd("something with pipes went wrong pipe_type=0\n", 2);//remove pipes_type after debugging
+			ft_putstr_fd("something with pipes went wrong pipe_type=0\n", 2);
 			return (EXIT_FAILURE);
 		}
 		if (exp_tok->in == 0)
@@ -61,7 +59,7 @@ int	handle_pipes(t_exp_tok *exp_tok, int pipe_type)
 	{
 		if (last_pipe_out == 0)
 		{
-			ft_putstr_fd("something with pipes went wrong pipe_type=2\n", 2);//remove pipes_type after debugging
+			ft_putstr_fd("something with pipes went wrong pipe_type=2\n", 2);
 			return (EXIT_FAILURE);
 		}
 		if (exp_tok->in == 0)

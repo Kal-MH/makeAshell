@@ -6,14 +6,13 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:00:07 by napark            #+#    #+#             */
-/*   Updated: 2021/12/17 21:10:49 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 23:12:37 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "brain.h"
 #include "parser_utils.h"
-
 
 int	get_tok_cmd(char *lex_tok, t_par_tok *par_tok, t_iter *iter)
 {

@@ -6,14 +6,13 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:01:50 by napark            #+#    #+#             */
-/*   Updated: 2021/12/17 21:11:06 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 23:13:08 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "brain.h"
 #include "minishell.h"
 #include "parser_utils.h"
-
 
 int	init_curr_par_tok(void)
 {
@@ -50,7 +49,6 @@ int	free_par_toks(t_par_tok *par_toks[], int exit_code)
 	return (exit_code);
 }
 
-
 int	free_parser(t_par_tok *par_tok[], t_iter *iter, int exit_status)
 {
 	free_par_toks(par_tok, 0);
@@ -59,7 +57,6 @@ int	free_parser(t_par_tok *par_tok[], t_iter *iter, int exit_status)
 	reset_par_toks();
 	return (exit_status);
 }
-
 
 size_t	get_tokens_size(char *lex_toks[])
 {

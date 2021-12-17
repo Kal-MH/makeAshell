@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 01:41:43 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:43:08 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 22:00:08 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,5 @@ int	set_pipe_type(t_par_tok **par_toks, int i)
 	else if (par_toks[i]->redir_type[is_pipe] && par_toks[i + 1] != NULL
 		&& par_toks[i + 1]->redir_type[is_pipe])
 		pipe_type = 1;
-	// fprintf(stderr, "the pipe_type of %s is %d\n", par_toks[i]->cmd[0], pipe_type);
 	return (pipe_type);
 }

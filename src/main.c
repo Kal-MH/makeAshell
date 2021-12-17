@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 15:09:04 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:48:50 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 21:37:15 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,9 @@
 #include "brain.h"
 #include "env_var_utils.h"
 
-/*
- * STILL USES clear_history INSTEAD OF rl_clear_history
- * SUBJECT.PDF DOES NOT ALLOW CLEAR_HISTORY
- * GITHUB ACTION ONLY KNOWS clear_history!!!
- */
 static int	exit_routine(void *to_free, int exit_status)
 {
-	clear_history(); // CHANGE TO rl_clear_history();
+	clear_history();
 	free(to_free);
 	free_envv(get_envv());
 	return (exit_status);
@@ -86,15 +81,6 @@ int	main(int argc, char *argv[], char *envp[])
 		return (EXIT_FAILURE);
 	set_envp(envp);
 	set_envv(envv);
-
-	//int i = 0;
-	// while (envp[i] != NULL)
-	// {
-	// 	printf("%s\n", envp[i]);
-	// 	i++;
-	// }
-	// printf("%d", 99999);
-	// printf("%s", envv->pwd);
 	if (argc != 1)
 		return (handle_flags(argc, argv));
 	if (routine() == EXIT_FAILURE)

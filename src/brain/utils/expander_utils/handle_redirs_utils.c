@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 01:40:33 by napark            #+#    #+#             */
-/*   Updated: 2021/12/17 21:09:51 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 21:59:17 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@ static int	open_in(t_par_tok *par_tok, t_exp_tok *exp_tok)
 	int		fd;
 	int		heredeoc_fd;
 
-
 	i = 0;
 	fd = 0;
 	if (exp_tok->in != 0)
-		heredeoc_fd = exp_tok->in;	
-
+		heredeoc_fd = exp_tok->in;
 	while (par_tok->redir_type[is_in] || par_tok->redir_type[is_in_heredoc])
 	{
 		i++;
@@ -35,7 +33,6 @@ static int	open_in(t_par_tok *par_tok, t_exp_tok *exp_tok)
 			fd = heredeoc_fd;
 		if (fd == -1)
 		{
-			// fprintf(stderr, "something with %s is wrong\n", par_tok->in[i]);//remove after testing
 			perror("ERROR");
 			return (EXIT_FAILURE);
 		}
@@ -46,7 +43,6 @@ static int	open_in(t_par_tok *par_tok, t_exp_tok *exp_tok)
 		i++;
 	}
 	exp_tok->in = fd;
-	// fprintf(stderr, "the new fd for input is now %d\n", exp_tok->in);//remove after testing
 	return (EXIT_SUCCESS);
 }
 

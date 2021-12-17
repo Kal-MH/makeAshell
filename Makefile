@@ -6,7 +6,7 @@
 #    By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/12 13:48:30 by napark            #+#    #+#              #
-#    Updated: 2021/12/14 00:28:30 by napark           ###   ########.fr        #
+#    Updated: 2021/12/18 00:49:29 by mkal             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC = $(SRC_PATH)main.c \
 		$(SRC_PATH)inbuilt/export.c $(SRC_PATH)inbuilt/echo.c $(SRC_PATH)inbuilt/env.c $(SRC_PATH)inbuilt/cd.c $(SRC_PATH)inbuilt/pwd.c $(SRC_PATH)inbuilt/unset.c $(SRC_PATH)inbuilt/exit.c \
 		$(SRC_PATH)inbuilt/utils/export_special.c $(SRC_PATH)inbuilt/utils/export_input_error.c $(SRC_PATH)inbuilt/utils/export_only.c \
 		$(BRAIN_PATH)lexer.c $(BRAIN_PATH)parser.c $(BRAIN_PATH)expander.c $(BRAIN_PATH)executor.c \
+		$(BRAIN_PATH)expander_utils.c $(BRAIN_PATH)executor_utils.c $(BRAIN_PATH)expander_utils2.c \
 		$(LEXER_UTILS_PATH)subshell_token_utils.c $(LEXER_UTILS_PATH)token_utils.c $(LEXER_UTILS_PATH)join_quotes.c $(LEXER_UTILS_PATH)check_syntax.c \
 		$(LEXER_UTILS_PATH)join_quotes_utils.c $(LEXER_UTILS_PATH)join_quotes_utils_two.c \
 		$(BRAIN_GETTER_SETTER_PATH)envp_get_set.c $(BRAIN_GETTER_SETTER_PATH)iter_get_set.c $(BRAIN_GETTER_SETTER_PATH)lexer_get_set.c $(BRAIN_GETTER_SETTER_PATH)par_tok_get_set.c $(BRAIN_GETTER_SETTER_PATH)expander_get_set.c \
@@ -65,7 +66,7 @@ all: $(NAME)
 # @$(CC) $(CC_FLAGS) $(INCLUDE_FLAGS) $(L_FLAGS) $(LIBFT_NAME) $(OBJ) -o $(NAME)
 $(NAME): $(OBJ) $(LIBFT_NAME)
 	@echo $(Y)Compiling [$(NAME)]...$(X)
-	@$(CC) $(OBJ) ./libft/obj/*.o $(CC_FLAGS) $(INCLUDE_FLAGS) $(L_FLAGS) -o $(NAME)
+	@$(CC) $(OBJ) $(CC_FLAGS) $(INCLUDE_FLAGS) $(L_FLAGS) -L$(LIBFT_PATH)/lib -lft -o $(NAME)
 	@echo $(G)Finished [$(NAME)]$(X)
 
 $(LIBFT_NAME): $(LIBFT_SRC)
