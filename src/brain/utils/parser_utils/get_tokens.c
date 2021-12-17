@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:00:07 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:39:37 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 21:10:49 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,7 @@
 #include "brain.h"
 #include "parser_utils.h"
 
-/**
- * @brief  Trys to get a command out of current lexer token
- * @note   
- * @param  *lex_tok: Current lexer token
- * @param  *par_tok: Parser token to write command to
- * @param  *iter: Iterator of parser, lexer, cmd, in, out
- * @retval int to indicate success or failure
- */
+
 int	get_tok_cmd(char *lex_tok, t_par_tok *par_tok, t_iter *iter)
 {
 	if (lex_tok == NULL)

@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:09:59 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:44:41 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 21:11:25 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 #include "env_var_utils.h"
 #include "inbuilt_utils.h"
 
-/*
-is used to cleanly exit with the given exit_status
-*/
+
 static int	ft_export_exit(char ***array, bool exit_status)
 {
 	ft_free_str_array(array);
@@ -25,9 +23,7 @@ static int	ft_export_exit(char ***array, bool exit_status)
 	return (EXIT_SUCCESS);
 }
 
-/*
-loops through all elements of env_var_cpy and sorts them by ascending order
-*/
+
 static int	ft_sort_loop(char **env_var_cpy, int i, int j)
 {
 	char	*temp;

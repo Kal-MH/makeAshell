@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 01:41:07 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:42:59 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 21:10:01 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,7 @@
 #include "brain.h"
 #include "expander_utils.h"
 
-/**
- * @brief  Gets heredoc to wait for
- * @note
- * @param  *par_tok:
- * @retval char pointer to (by parser) allocated heredoc
- */
+
 static char	*get_heredoc(t_par_tok *par_tok)
 {
 	int	i;

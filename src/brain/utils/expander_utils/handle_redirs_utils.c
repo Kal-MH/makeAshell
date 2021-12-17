@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 01:40:33 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:42:49 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 21:09:51 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static int	open_in(t_par_tok *par_tok, t_exp_tok *exp_tok)
 	int		fd;
 	int		heredeoc_fd;
 
-	// save the fd of the heredoc if there was one, if (exp_tok->in != 0)
+
 	i = 0;
 	fd = 0;
 	if (exp_tok->in != 0)
-		heredeoc_fd = exp_tok->in;
-	// fprintf(stderr, "after handle redir commad %s has in:%d and out:%d\n", exp_tok->cmd[0], exp_tok->in, exp_tok->out);
+		heredeoc_fd = exp_tok->in;	
+
 	while (par_tok->redir_type[is_in] || par_tok->redir_type[is_in_heredoc])
 	{
 		i++;

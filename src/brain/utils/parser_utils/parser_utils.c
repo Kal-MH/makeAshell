@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:01:50 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:39:21 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 21:11:06 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 #include "minishell.h"
 #include "parser_utils.h"
 
-/**
- * @brief  Allocates current parser token and resets cmd- in- and out-iterator
- * @note   
- * @retval int to indicate success or failure
- */
+
 int	init_curr_par_tok(void)
 {
 	t_par_tok	**par_toks;
@@ -54,15 +50,7 @@ int	free_par_toks(t_par_tok *par_toks[], int exit_code)
 	return (exit_code);
 }
 
-/**
- * @brief  Correctly frees allocated memory for parser tokens and iterator
- * @note   
- * @param  *par_tok[]: Parser Tokens
- * @param  *iter: Iterator of Parser Tokens, Lexer Tokens, Command-, In- and 
- * * Out-Array
- * @param  exit_status: Exit status to return
- * @retval Returns exit_status
- */
+
 int	free_parser(t_par_tok *par_tok[], t_iter *iter, int exit_status)
 {
 	free_par_toks(par_tok, 0);
@@ -72,12 +60,7 @@ int	free_parser(t_par_tok *par_tok[], t_iter *iter, int exit_status)
 	return (exit_status);
 }
 
-/**
- * @brief  Returns correct size for allocation of Parser-Tokens-Array
- * @note   
- * @param  *lex_toks[]: 
- * @retval Correct Size for allocation
- */
+
 size_t	get_tokens_size(char *lex_toks[])
 {
 	size_t	size;

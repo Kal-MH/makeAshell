@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:10:31 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:44:58 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/17 21:11:19 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 #include "env_var_utils.h"
 #include "inbuilt_utils.h"
 
-/*
-will update envv->pwd/oldpwd if exported
-*/
+
 int	export_wd(t_env *envv, t_export *exp, char **argv)
 {
 	if (ft_strlen(argv[exp->j]) > ft_strlen("PWD=")
