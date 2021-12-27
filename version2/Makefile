@@ -6,7 +6,7 @@
 #    By: napark <napark@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 17:02:38 by napark            #+#    #+#              #
-#    Updated: 2021/12/27 13:27:07 by mkal             ###   ########.fr        #
+#    Updated: 2021/12/27 20:07:23 by mkal             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,14 +28,17 @@ SRCS	=	$(SRCS_PATH)/main.c $(SRCS_PATH)/signal.c \
 		$(TOKEN_PATH)/tokenizer.c $(TOKEN_PATH)/token_util.c \
 		$(TOKEN_PATH)/token_util2.c $(TOKEN_PATH)/token_check.c \
 		$(ENV_PATH)/env.c $(ENV_PATH)/env_util.c\
+		$(ENV_PATH)/env_return_value.c\
 		$(BUILTIN_PATH)/export.c $(BUILTIN_PATH)/export_util.c \
 		$(BUILTIN_PATH)/ft_pwd.c $(BUILTIN_PATH)/ft_exit.c \
 		$(BUILTIN_PATH)/ft_cd.c $(BUILTIN_PATH)/ft_echo.c \
 		$(BUILTIN_PATH)/ft_unset.c $(BUILTIN_PATH)/ft_export.c \
 		$(CMD_PATH)/cmd.c $(CMD_PATH)/cmd_parse.c \
 		$(CMD_PATH)/cmd_check.c $(CMD_PATH)/cmd_util.c \
+		$(CMD_PATH)/make_cmd_util.c \
 		$(EXECVE_PATH)/path.c $(EXECVE_PATH)/execve.c $(EXECVE_PATH)/builtin.c \
 		$(EXECVE_PATH)/execve_util.c $(EXECVE_PATH)/check_redirection.c\
+		$(EXECVE_PATH)/execve_util2.c\
 		$(UTIL_PATH)/string_util.c $(UTIL_PATH)/get_next_line.c $(UTIL_PATH)/free.c \
 		$(TERMINAL_PATH)/press_arrow2.c $(TERMINAL_PATH)/term.c \
 		$(TERMINAL_PATH)/cursor.c $(TERMINAL_PATH)/history.c \

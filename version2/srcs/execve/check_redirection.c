@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 06:10:12 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/27 15:21:45 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 19:58:55 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,11 @@ static void	set_heredoc(t_cmd *cmd, char *eof)
 	}
 	cmd->fd_in = pip[0];
 	if (!heredoc_loop(pip, heredoc_eof))
-	{
 		cmd->fd_in = -1;
-		free(heredoc_eof);
-		return ;
-	}
 	if (close(pip[1]) != 0)
 	{
 		close(pip[0]);
 		cmd->fd_in = -1;
-		free(heredoc_eof);
-		return ;
 	}
 	free(heredoc_eof);
 }

@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 05:11:32 by napark            #+#    #+#             */
-/*   Updated: 2021/12/27 17:44:41 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 20:06:07 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,33 +50,7 @@ void	execute_cmd2(t_state *s, t_cmd *cmd, char **envp)
 		printf("bash: %s\n", strerror(errno));
 	}
 	else if (cmd->ac == 0)
-	{
-		int n = 0;
-		char buf[10];
-
-		if (cmd->fd_in > 0) //open file with stdout
-		{
-			while (1)
-			{
-				n = read(cmd->fd_in, buf, 10);
-				if (n <= 0)
-					break ;
-				write(1, buf, n);
-			}
-		}
-		else if (cmd->fd_out > 0) //write with stdin
-		{
-			while (1)
-			{
-				n = read(0, buf, 9);
-				if (n <= 0)
-					break ;
-				buf[n] = 0;
-				write(cmd->fd_out, buf, n);
-			}
-		}
-		return ;
-	}
+		execve_std(cmd);
 	else if (builtin(s, cmd))
 		return ;
 	else if (find_command(s, cmd))
