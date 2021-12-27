@@ -3,51 +3,43 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: llim <llim@student.42.fr>                  +#+  +:+       +#+         #
+#    By: napark <napark@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/03/15 17:02:38 by llim              #+#    #+#              #
-#    Updated: 2021/12/24 01:23:01 by mkal             ###   ########.fr        #
+#    Created: 2021/11/15 17:02:38 by napark            #+#    #+#              #
+#    Updated: 2021/12/27 13:27:07 by mkal             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
 CC		=	gcc
 CFLAGS	=	-g -Wall -Wextra -Werror
-SRCS	=	srcs/main.c\
-			srcs/signal.c \
-			srcs/prompt.c \
-			srcs/tokenizer.c \
-			srcs/token_util.c \
-			srcs/token_util2.c\
-			srcs/token_check.c \
-			srcs/env.c\
-			srcs/env_util.c\
-			srcs/export.c\
-			srcs/export_util.c \
-			srcs/get_next_line.c \
-			srcs/ft_pwd.c \
-			srcs/ft_exit.c \
-			srcs/ft_cd.c \
-			srcs/ft_echo.c \
-			srcs/ft_unset.c \
-			srcs/ft_export.c \
-			srcs/cmd.c \
-			srcs/cmd_parse.c \
-			srcs/cmd_check.c \
-			srcs/cmd_util.c \
-			srcs/path.c \
-			srcs/execve.c \
-			srcs/execve_util.c \
-			srcs/check_redirection.c\
-			srcs/check_cmd_dollar_sign.c\
-			srcs/press_arrow2.c\
-			srcs/string_util.c \
-			srcs/term.c \
-			srcs/cursor.c \
-			srcs/history.c \
-			srcs/press_arrow.c \
-			srcs/free.c \
-			srcs/builtin.c
+
+# PATH
+SRCS_PATH = srcs
+CMD_PATH = $(SRCS_PATH)/cmd
+EXECVE_PATH = $(SRCS_PATH)/execve
+BUILTIN_PATH = $(EXECVE_PATH)/builtin
+TERMINAL_PATH = $(SRCS_PATH)/terminal
+TOKEN_PATH = $(SRCS_PATH)/tokenizer
+UTIL_PATH = $(SRCS_PATH)/util
+ENV_PATH = $(SRCS_PATH)/env
+
+SRCS	=	$(SRCS_PATH)/main.c $(SRCS_PATH)/signal.c \
+		$(TOKEN_PATH)/tokenizer.c $(TOKEN_PATH)/token_util.c \
+		$(TOKEN_PATH)/token_util2.c $(TOKEN_PATH)/token_check.c \
+		$(ENV_PATH)/env.c $(ENV_PATH)/env_util.c\
+		$(BUILTIN_PATH)/export.c $(BUILTIN_PATH)/export_util.c \
+		$(BUILTIN_PATH)/ft_pwd.c $(BUILTIN_PATH)/ft_exit.c \
+		$(BUILTIN_PATH)/ft_cd.c $(BUILTIN_PATH)/ft_echo.c \
+		$(BUILTIN_PATH)/ft_unset.c $(BUILTIN_PATH)/ft_export.c \
+		$(CMD_PATH)/cmd.c $(CMD_PATH)/cmd_parse.c \
+		$(CMD_PATH)/cmd_check.c $(CMD_PATH)/cmd_util.c \
+		$(EXECVE_PATH)/path.c $(EXECVE_PATH)/execve.c $(EXECVE_PATH)/builtin.c \
+		$(EXECVE_PATH)/execve_util.c $(EXECVE_PATH)/check_redirection.c\
+		$(UTIL_PATH)/string_util.c $(UTIL_PATH)/get_next_line.c $(UTIL_PATH)/free.c \
+		$(TERMINAL_PATH)/press_arrow2.c $(TERMINAL_PATH)/term.c \
+		$(TERMINAL_PATH)/cursor.c $(TERMINAL_PATH)/history.c \
+		$(TERMINAL_PATH)/press_arrow.c $(TERMINAL_PATH)/prompt.c\
 
 INCS	=	-I includes -I libft
 OBJS	=	$(SRCS:.c=.o)
