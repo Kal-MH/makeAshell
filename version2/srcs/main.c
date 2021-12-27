@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 17:26:45 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/24 00:57:10 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 15:38:18 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	prepare_token_and_cmd(t_state *state)
 	state->path_head = 0;
 	free(state->input);
 	state->input = 0;
-	free(state->input2);
+	if (state->input2)
+		free(state->input2);
 	state->input2 = 0;
 	reset_save(state);
 }
