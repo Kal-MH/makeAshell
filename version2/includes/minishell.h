@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:29:42 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/24 01:23:51 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 20:19:20 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,11 @@ int					check_redirection(t_cmd *cmd);
 void				execute_error(t_state *s, t_cmd *cmd, int type);
 
 /*
+**	execve_util2
+*/
+void				execve_std(t_cmd *cmd);
+
+/*
 **	term
 */
 void				init_term(t_state *s);
@@ -265,6 +270,9 @@ void				add_env_back(t_env **head, char *key,
 t_env				*create_env(char *key, char *value, int has_equal);
 void				change_dollar_sign(int i);
 
+char				*change_return_value(char *key);
+char				*insert_return_value(char *key);
+
 /*
 **	env_util
 */
@@ -328,9 +336,9 @@ void				set_fork_builtin(t_state *s, t_cmd *cmd);
 int					builtin(t_state *s, t_cmd *cmd);
 
 /*
- * 	check_cmd_dollar_sign
- */
-void				check_cmd_dollar_sign(t_cmd *cmd);
+** make_cmd_util
+*/
+void				make_cmd_loop(t_token *start, char **av, int *i);
 
 /*
 **	cmd_parse

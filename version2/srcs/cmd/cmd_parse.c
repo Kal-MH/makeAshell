@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 13:42:16 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/24 00:48:14 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 20:12:52 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ void	make_cmd(t_token *start, int ac, int type, int i)
 			jump_space(av[i], &i);
 		else
 		{
-			if ((start->type >= LEFT && start->type <= DOUBLERIGHT && av[i]))
-				i++;
-			else if (start->type == DOUBLE || start->type == COMMON)
-				check_backslash_and_env(&g_state, start);
-			tmp = ft_strjoin2(av[i], start->str);
-			free(av[i]);
-			av[i] = tmp;
+			make_cmd_loop(start, av, &i);
+			if (i < ac)
+			{
+				tmp = ft_strjoin2(av[i], start->str);
+				free(av[i]);
+				av[i] = tmp;
+			}
 		}
 		start = start->next;
 	}

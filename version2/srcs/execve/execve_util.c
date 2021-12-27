@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 06:10:12 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/23 15:38:26 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 20:03:02 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,39 +78,6 @@ void	renewal_cmd(t_cmd *cmd)
 	cmd->av = new;
 	cmd->ac = cnt;
 }
-
-/*int		check_redirection(t_cmd *cmd)
-{
-	int	i;
-
-	i = 0;
-	cmd->fd_in = 0;
-	cmd->fd_out = 1;
-	while (cmd->av[i])
-	{
-		if (cmd->av[i][0] == '>')
-		{
-			if (cmd->av[i][1] == '>')
-				cmd->fd_out = open(cmd->av[i + 1], O_WRONLY
-						| O_APPEND | O_CREAT, 0644);
-			else
-				cmd->fd_out = open(cmd->av[i + 1], O_WRONLY
-						| O_TRUNC | O_CREAT, 0644);
-		}
-		if (cmd->av[i][0] == '<')
-		{
-			if (cmd->av[i][1] == '<')
-				set_heredoc(cmd, cmd->av[i + 1]);
-			else
-				cmd->fd_in = open(cmd->av[i + 1], O_RDONLY);
-		}
-		i++;
-	}
-	if (cmd->fd_out == -1 || cmd->fd_in == -1)
-		return (0);
-	renewal_cmd(cmd);
-	return (1);
-}*/
 
 void	execute_error(t_state *s, t_cmd *cmd, int type)
 {

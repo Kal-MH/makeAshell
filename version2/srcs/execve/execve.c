@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 05:11:32 by napark            #+#    #+#             */
-/*   Updated: 2021/12/27 10:43:51 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 20:06:07 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ void	execute_cmd2(t_state *s, t_cmd *cmd, char **envp)
 
 	if (!check_redirection(cmd))
 	{
+		s->ret = 1;
 		printf("bash: %s\n", strerror(errno));
 	}
 	else if (cmd->ac == 0)
-		return ;
+		execve_std(cmd);
 	else if (builtin(s, cmd))
 		return ;
 	else if (find_command(s, cmd))
@@ -97,7 +98,7 @@ void	handle_syntax_error(t_state *s, t_cmd *cmd)
 		printf("bash: syntax error near unexpected token `;;'\n");
 	else if (cmd->type == ERROR_RDIR)
 		printf("bash: syntax error near unexpected token `newline'\n");
-	s->ret = 258;
+	s->ret = 1;
 }
 
 void	execute(t_state *s, t_cmd *cmd, char **envp)
