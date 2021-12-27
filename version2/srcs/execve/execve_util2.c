@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 20:03:10 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/27 20:07:55 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 20:13:52 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	execve_stdout(t_cmd *cmd)
 {
-	int	n;
+	int		n;
 	char	buf[10];
 
 	n = 0;
@@ -29,7 +29,7 @@ static void	execve_stdout(t_cmd *cmd)
 
 static void	execve_stdin(t_cmd *cmd)
 {
-	int	n;
+	int		n;
 	char	buf[10];
 
 	n = 0;

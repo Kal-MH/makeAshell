@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 19:55:03 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/27 15:37:59 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 20:14:45 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,6 @@ int	find_cur_type(t_token **head, int *has_space)
 	type = token->type;
 	while (token)
 	{
-		//if (token->type != SPACE)
-		//	type = token->type;
 		if (token->type != SPACE)
 		{
 			type = token->type;

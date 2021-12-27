@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:19:16 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/27 18:25:33 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 20:20:54 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ char	*check_env(t_state *state, t_token *token, char *value, int *i)
 {
 	int		len;
 	char	*key;
-	char	*temp;
 
 	len = 0;
 	if (*i > 0 && token->str[*i - 1] == '\\')
@@ -84,15 +83,11 @@ char	*check_env(t_state *state, t_token *token, char *value, int *i)
 		len = check_key_len(&token->str[*i + 1], FALSE);
 		key = ft_substr(&token->str[*i + 1], 0, len);
 		if (!ft_strcmp(key, "?"))
-		{
-			temp = ft_itoa(state->ret);
-			value = ft_strdup(temp);
-			free(temp);
-		}
+			value = change_return_value(key);
 		else
 		{
 			if (key[0] == '?')
-				value = change_return_value(key);
+				value = insert_return_value(key);
 			else
 				value = ft_strdup(find_env_val(state->env_head, key));
 		}

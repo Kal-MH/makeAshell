@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:29:42 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/27 20:07:03 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 20:19:20 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,7 @@ t_env				*create_env(char *key, char *value, int has_equal);
 void				change_dollar_sign(int i);
 
 char				*change_return_value(char *key);
+char				*insert_return_value(char *key);
 
 /*
 **	env_util
@@ -338,7 +339,6 @@ int					builtin(t_state *s, t_cmd *cmd);
 ** make_cmd_util
 */
 void				make_cmd_loop(t_token *start, char **av, int *i);
-
 
 /*
 **	cmd_parse
