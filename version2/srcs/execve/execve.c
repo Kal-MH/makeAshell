@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 05:11:32 by napark            #+#    #+#             */
-/*   Updated: 2021/12/24 00:13:23 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 10:43:51 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	execute_cmd2(t_state *s, t_cmd *cmd, char **envp)
 
 	if (!check_redirection(cmd))
 	{
-		printf("bash: %s: %s\n", cmd->av[2], strerror(errno));
+		printf("bash: %s\n", strerror(errno));
 	}
 	else if (cmd->ac == 0)
 		return ;
