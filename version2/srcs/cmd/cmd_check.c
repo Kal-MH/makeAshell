@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:19:16 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/24 00:47:48 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 17:35:54 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,20 @@ char	*check_env(t_state *state, t_token *token, char *value, int *i)
 			free(temp);
 		}
 		else
-			value = ft_strdup(find_env_val(state->env_head, key));
+		{
+			if (key[0] == '?')
+			{
+				temp = ft_itoa(g_state.ret);
+				value = ft_strdup(&key[1]);
+				free(key);
+				key = ft_strjoin(temp, value);
+				free(temp);
+				free(value);
+				value = ft_strdup(key);
+			}
+			else
+				value = ft_strdup(find_env_val(state->env_head, key));
+		}
 		free(key);
 	}
 	return (changed_str(token->str, *i, *i + len, value));

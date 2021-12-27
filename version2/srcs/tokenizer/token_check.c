@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 19:55:03 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/27 14:59:33 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 17:20:57 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ void	check_token_error(t_state *state)
 	while (token)
 	{
 		if (token->type <= ERROR_QUOTE)
-		{
-			printf("error\n");
 			return (return_quote_error(state, token));
-		}
 		else if (token->type >= LEFT && token->type <= DOUBLERIGHT)
 		{
 			if (!token->next || is_operator_error(token->next->type))

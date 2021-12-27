@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 22:38:22 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/24 00:12:26 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/27 17:31:59 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,23 @@ void	change_dollar_sign(int i)
 		free(temp);
 	}
 	else
-		value = ft_strdup(find_env_val(g_state.env_head, key));
+	{
+		if (key[0] == '?')
+		{
+			//return value
+			temp = ft_itoa(g_state.ret);
+			//string after return value
+			value = ft_strdup(&key[1]);
+			//join
+			free(key);
+			key = ft_strjoin(temp, value);
+			free(temp);
+			free(value);
+			value = ft_strdup(key);
+		}
+		else
+			value = ft_strdup(find_env_val(g_state.env_head, key));
+	}
 	free(key);
 	temp = changed_str(input, i, i + len, value);
 	free(g_state.input2);
