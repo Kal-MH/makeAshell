@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 17:26:45 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/27 16:59:34 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/28 14:23:50 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	prepare_token_and_cmd(t_state *state)
 void	init_state(t_state *state)
 {
 	ft_memset((void *)state, 0, sizeof(t_state));
+	state->s_count = 0;
 	tcgetattr(0, &state->t.save);
 }
 
