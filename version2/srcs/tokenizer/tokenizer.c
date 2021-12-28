@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 19:55:03 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/28 15:27:11 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/28 23:43:06 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	make_token(t_state *state, int count, int i, int type)
 	while (j < count)
 		token_str[j++] = state->input2[i++];
 	token_str[j] = '\0';
+	printf("token : %s\n", token_str);
 	add_token_back(&state->token_head, token_str, type);
 	free(token_str);
 	return (i);

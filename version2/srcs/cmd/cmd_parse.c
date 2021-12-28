@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 13:42:16 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/28 15:48:48 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/28 23:58:19 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,20 @@ void	parse_cmd(t_state *state, int ac)
 			ac--;
 		token = token->next;
 	}
+	
+	printf("-----parse cmd----\n");
+	t_cmd *head = g_state.cmd_head;
+	int j;
+	while (head)
+	{
+		j = 0;
+		while (head->av[j])
+		{
+			printf("parse cmd : %s\n", head->av[j]);
+			j++;
+		}
+		head = head->next;
+	}
 }
 
 void	make_cmd(t_token *start, int ac, int type, int i)
@@ -58,10 +72,15 @@ void	make_cmd(t_token *start, int ac, int type, int i)
 				tmp = ft_strjoin2(av[i], start->str);
 				free(av[i]);
 				av[i] = tmp;
+				printf("%d. %s\n", i, av[i]);
 			}
 		}
 		start = start->next;
 	}
+	printf("-----------\n");
+	int k = -1;
+	while (av[++k])
+		printf("make cmd : %s\n", av[k]);
 	add_cmd_back(&g_state.cmd_head, av, type);
 }
 

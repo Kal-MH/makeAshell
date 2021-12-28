@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_return_value.c                                 :+:      :+:    :+:   */
+/*   ft_strchr_index.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/27 18:06:29 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/28 23:08:43 by mkal             ###   ########.fr       */
+/*   Created: 2021/12/29 00:20:02 by mkal              #+#    #+#             */
+/*   Updated: 2021/12/29 00:23:49 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*insert_return_value(char *key)
+int	ft_strchr_index(char *str, int c)
 {
-	char	*temp;
-	char	*value;
-	char	*result;
+	int	i;
 
-	temp = ft_itoa(g_state.ret);
-	if (key[1])
+	i = 0;
+	while (str && str[i])
 	{
-		value = ft_strdup(&key[1]);
-		result = ft_strjoin(temp, value);
-		free(value);
+		if (str[i] == (char) c)
+			return (i);
+		i++;
 	}
-	else
-		result = ft_strdup(temp);
-	free(temp);
-	return (result);
-}
-
-char	*change_return_value(char *key)
-{
-	char	*temp;
-
-	(void)key;
-	temp = ft_itoa(g_state.ret);
-	return (temp);
+	return (-1);
 }

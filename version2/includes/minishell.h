@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:29:42 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/28 15:49:05 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 00:30:49 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,11 @@ int					check_redirection(t_cmd *cmd);
 void				execute_error(t_state *s, t_cmd *cmd, int type);
 
 /*
+**	check_cmd_dollar_sign
+*/
+void				check_cmd_dollar_sign(t_cmd *cmd);
+
+/*
 **	execve_util2
 */
 void				execve_std(t_cmd *cmd);
@@ -228,6 +233,11 @@ char				*ft_strcjoin(char *str, char c);
 void				print_save_char(t_state *s, char c);
 char				*delete_last_char(char *str);
 void				print_mini(void);
+
+/*
+**	ft_strchr_index
+*/
+int					ft_strchr_index(char *str, int c);
 
 /*
 **	tokenizer

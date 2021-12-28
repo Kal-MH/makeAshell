@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_util.c                                       :+:      :+:    :+:   */
+/*   token_util2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:41:40 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/24 01:33:30 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/28 21:57:02 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ int	is_operator_two(char *c, int i)
 	return (COMMON);
 }
 
+static int	handle_dollar_sign(int *count, int i)
+{
+	*count = check_key_len(&g_state.input2[i + 1], 1);
+	count++;
+	return (COMMON);
+}
+
 void	tokenizer_loop(int i, int count, int type)
 {
 	while (g_state.input2[i])
@@ -39,8 +46,9 @@ void	tokenizer_loop(int i, int count, int type)
 			count = 2;
 		else if (type == DOLLAR)
 		{
-			change_dollar_sign(i);
-			continue ;
+			type = handle_dollar_sign(&count, i);
+		//	change_dollar_sign(i);
+		//	continue ;
 		}
 		else if (type == SINGLE || type == DOUBLE)
 		{

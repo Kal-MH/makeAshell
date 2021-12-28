@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:19:16 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/28 15:43:28 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/28 21:54:30 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	check_backslash_and_env(t_state *state, t_token *start)
 {
 	(void)state;
 	check_backslash(start);
-	check_dollar_sign(state, start);
+	//check_dollar_sign(state, start);
 	check_env_space(state);
 }
 

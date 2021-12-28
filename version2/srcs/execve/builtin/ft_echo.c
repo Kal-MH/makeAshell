@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:42:21 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/23 14:38:05 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/28 23:38:09 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	ft_echo(t_state *s, t_cmd *cmd)
 			handle_escape(cmd->av[i]);
 		else
 			write(1, cmd->av[i], ft_strlen(cmd->av[i]));
-		if (i < cmd->ac - 1)
+		if (i < cmd->ac - 1 && ft_strlen(cmd->av[i]))
 			write(1, " ", 1);
 		i++;
 	}
