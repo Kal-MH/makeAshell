@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:29:42 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/27 20:19:20 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/28 14:24:11 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@
 # define IS_DIR 3
 # define NO_F_OR_D 4
 
+# define HISTORY_LIMIT 10
+
 typedef struct s_path
 {
 	char			*path;
@@ -137,7 +139,9 @@ typedef struct s_state
 	t_path			*path_head;
 	t_term			t;
 	t_save			*save_head;
+	t_save			*save_tail;
 	int				s_flag;
+	int				s_count;
 	char			*input;
 	char			*input2;
 	int				is_fork;

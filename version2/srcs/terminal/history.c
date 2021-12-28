@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 18:33:51 by napark            #+#    #+#             */
-/*   Updated: 2021/12/24 00:18:44 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/28 14:49:16 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,24 @@ void	delete_save(t_save *save)
 	save = 0;
 }
 
+void	fflush_history(t_state *s)
+{
+	t_save	*next_tail;
+
+	next_tail = s->save_tail->prev;
+	delete_save(s->save_tail);
+	s->save_tail = next_tail;
+	s->s_count--;
+}
+
 void	reset_save(t_state *s)
 {
 	t_save	*tmp;
 
 	if (s->save_head == 0)
 		return ;
+	if (s->s_count > HISTORY_LIMIT)
+		fflush_history(s);
 	while (s->save_head->prev)
 		s->save_head = s->save_head->prev;
 	tmp = s->save_head->next;
@@ -53,6 +65,7 @@ t_save	*push_front_save(char *input, t_save *old_head, int flag)
 	new->flag = flag;
 	if (old_head != 0)
 		old_head->prev = new;
+	g_state.s_count++;
 	return (new);
 }
 
@@ -64,6 +77,7 @@ void	save_history(t_state *s)
 	if (s->save_head == 0)
 	{
 		s->save_head = push_front_save(s->input, 0, 1);
+		s->save_tail = s->save_head;
 	}
 	else
 	{
