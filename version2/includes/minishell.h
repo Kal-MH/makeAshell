@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:29:42 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/28 14:24:11 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/28 15:49:05 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -342,7 +342,7 @@ int					builtin(t_state *s, t_cmd *cmd);
 /*
 ** make_cmd_util
 */
-void				make_cmd_loop(t_token *start, char **av, int *i);
+void				make_cmd_condition(t_token *start, char **av, int *i);
 
 /*
 **	cmd_parse

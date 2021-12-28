@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:19:16 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/27 20:20:54 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/28 15:43:28 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	check_backslash(t_token *token)
 	i = 0;
 	while (token->str[i])
 	{
-		if (token->str[i] == '\\'
-			&& (token->str[i + 1] == '\\' || token->str[i + 1] == '\"'))
+		if (token->str[i] == '\\')
+			//&& (token->str[i + 1] == '\\' || token->str[i + 1] == '\"'))
 		{
 			tmp = ft_substr(token->str, 0, i);
 			tmp2 = ft_strjoin2(tmp, &token->str[i + 1]);

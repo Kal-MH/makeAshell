@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 13:42:16 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/27 20:12:52 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/28 15:48:48 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	make_cmd(t_token *start, int ac, int type, int i)
 			jump_space(av[i], &i);
 		else
 		{
-			make_cmd_loop(start, av, &i);
+			make_cmd_condition(start, av, &i);
 			if (i < ac)
 			{
 				tmp = ft_strjoin2(av[i], start->str);
