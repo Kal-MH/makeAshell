@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:29:42 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 00:30:49 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 01:38:02 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ void				print_mini(void);
 **	ft_strchr_index
 */
 int					ft_strchr_index(char *str, int c);
+int					ft_strhas(char *str, char *set);
 
 /*
 **	tokenizer

@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 05:11:32 by napark            #+#    #+#             */
-/*   Updated: 2021/12/28 23:34:49 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 01:53:37 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	execute(t_state *s, t_cmd *cmd, char **envp)
 	int		stin;
 	int		stout;
 
-	printf("------------\n");
+	/*printf("------------\n");
 	cur = cmd;
 	while (cur)
 	{
@@ -118,7 +118,7 @@ void	execute(t_state *s, t_cmd *cmd, char **envp)
 			j++;
 		}
 		cur = cur->next;
-	}
+	}*/
 
 	if (!cmd)
 		return ;
@@ -132,7 +132,7 @@ void	execute(t_state *s, t_cmd *cmd, char **envp)
 			pipe(cur->pip);
 			stin = dup(0);
 			stout = dup(1);
-			check_cmd_dollar_sign(cur);
+			//check_cmd_dollar_sign(cur);
 			execute_cmd2(s, cur, envp);
 			close_fd_dup(cur, &stin, &stout);
 			cur = cur->next;

@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 19:33:38 by napark            #+#    #+#             */
-/*   Updated: 2021/12/24 00:44:49 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 01:53:29 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	execute_builtin(t_state *s, t_cmd *cmd)
 	if (!ft_strcmp(cmd->av[0], "pwd"))
 		ft_pwd(s, cmd);
 	else if (!ft_strcmp(cmd->av[0], "echo"))
+	{
+		check_cmd_dollar_sign(cmd);
 		ft_echo(s, cmd);
+	}
 	else if (!ft_strcmp(cmd->av[0], "cd"))
 		ft_cd(s, cmd);
 	else if (!ft_strcmp(cmd->av[0], "env"))

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr_index.c                                  :+:      :+:    :+:   */
+/*   ft_str_func.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 00:20:02 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 00:23:49 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 03:25:37 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,32 @@ int	ft_strchr_index(char *str, int c)
 	while (str && str[i])
 	{
 		if (str[i] == (char) c)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+int	ft_strhas(char *str, char *set)
+{
+	int	i;
+	//int	j;
+
+	i = 0;
+	while (str && str[i])
+	{
+		/*j = 0;
+		while (set && set[j])
+		{
+			if (str[i] == set[j])
+				j++;
+			else
+				break ;
+		}
+		if (set[j] == 0)
+			return (i);
+			*/
+		if (!ft_strncmp(&str[i], set, ft_strlen(set)))
 			return (i);
 		i++;
 	}
