@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 18:41:40 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/28 21:57:02 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 17:43:30 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	tokenizer_loop(int i, int count, int type)
 		else if (type == DOLLAR)
 		{
 			type = handle_dollar_sign(&count, i);
-		//	change_dollar_sign(i);
-		//	continue ;
 		}
 		else if (type == SINGLE || type == DOUBLE)
 		{

@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:19:16 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 15:06:12 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 17:32:15 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	check_backslash_and_env(t_state *state, t_token *start)
 {
 	(void)state;
 	check_backslash(start);
-	//check_dollar_sign(state, start);
 	check_env_space(state);
 }
 
@@ -105,10 +104,8 @@ char	*changed_str(char *origin, int start, int end, char *insert)
 
 	front = ft_substr(origin, 0, start);
 	front_insert = ft_strjoin2(front, insert);
-	//back = ft_substr(origin, end + 1, ft_strlen(origin));
 	back = ft_substr(origin, end + 1, ft_strlen(origin) - (end - start));
 	result = ft_strjoin2(front_insert, back);
-	//printf("front : %s, back : %s, result : %s\n", front, back, result);
 	free(front);
 	free(back);
 	free(insert);

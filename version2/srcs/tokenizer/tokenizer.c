@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 19:55:03 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 17:28:17 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 17:43:49 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	make_token(t_state *state, int count, int i, int type)
 	while (j < count)
 		token_str[j++] = state->input2[i++];
 	token_str[j] = '\0';
-	//printf("token : %s\n", token_str);
 	add_token_back(&state->token_head, token_str, type);
 	free(token_str);
 	return (i);
@@ -72,7 +71,7 @@ char	*trim_str(char *str, int type)
 	if (type == SINGLE || type == DOUBLE)
 		str[ft_strlen(str) - 1] = '\0';
 	else if (type == BACKSLASH
-			&& (str[1] == '\\' || !is_operator(str, 1)))
+		&& (str[1] == '\\' || !is_operator(str, 1)))
 	{
 		i = 0;
 		str[i] = str[i + 1];

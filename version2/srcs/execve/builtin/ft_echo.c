@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:42:21 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 02:09:26 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 17:40:03 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,6 @@ void	check_echo_flag(char **av, int *i, int *flag)
 		else
 			break ;
 	}
-
-	/*if (av[1] && av[*i][0] == '-' && av[*i][1] == 'n')
-	{
-		if (av[*i][2] == '\0')
-		{
-			*flag = 1;
-			j = *i;
-			while (av[j][0] == '-' && av[j][1] == 'n')
-			{
-				if (av[j][2] == '\0')
-					(*i)++;
-				j++;
-			}
-		}
-	}*/
 }
 
 static int	has_escape_character(char *cmd)
