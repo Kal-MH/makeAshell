@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:19:16 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 01:46:19 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 15:06:12 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,10 @@ char	*changed_str(char *origin, int start, int end, char *insert)
 
 	front = ft_substr(origin, 0, start);
 	front_insert = ft_strjoin2(front, insert);
+	//back = ft_substr(origin, end + 1, ft_strlen(origin));
 	back = ft_substr(origin, end + 1, ft_strlen(origin) - (end - start));
 	result = ft_strjoin2(front_insert, back);
+	//printf("front : %s, back : %s, result : %s\n", front, back, result);
 	free(front);
 	free(back);
 	free(insert);

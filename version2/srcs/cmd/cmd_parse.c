@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 13:42:16 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 02:22:19 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 15:50:29 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,12 @@ void	make_cmd(t_token *start, int ac, int type, int i)
 		}
 		start = start->next;
 	}
+	/*
 	printf("-----------\n");
 	int k = -1;
 	while (av[++k])
 		printf("make cmd : %s\n", av[k]);
-		
+		*/
 	add_cmd_back(&g_state.cmd_head, av, type);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 16:15:47 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 03:57:39 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 17:09:03 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ int	check_dollar_key_len(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '$')
-			return (i);
+		if (str[i] == '$' || str[i] == '\''
+				|| str[i] == ' ')
+			break ;
 		i++;
 	}
 	return (i);
@@ -49,7 +50,8 @@ static char	*get_env_value_condition(char *cmd, int *i, int *len_ptr)
 	if (key == 0)
 	{
 		key = ft_strdup("");
-		*len_ptr = check_key_len(&cmd[*i + 1], 0);
+		*len_ptr = check_dollar_key_len(&cmd[*i + 1]);
+		//*len_ptr = check_key_len(&cmd[*i + 1], 0);
 	}
 	return (key);
 }
@@ -67,7 +69,7 @@ static char	*get_env_value_condition_ret(char *cmd, int *i, int *len_ptr)
 	return (key);
 }
 
-char	*get_env_value(char *cmd, int *i)
+char	*get_env_value(char *cmd, int *i, int *b_onset)
 {
 	int		len;
 	char	*key;
@@ -78,7 +80,10 @@ char	*get_env_value(char *cmd, int *i)
 	value = 0;
 	key = 0;
 	if (*i > 0 && cmd[*i - 1] == '\\')
+	{
+		*b_onset = 1;
 		*i = *i - 1;
+	}
 	else if (cmd[*i + 1])
 	{
 		if (!ft_strncmp(&cmd[*i + 1], "?", 1))
@@ -108,25 +113,27 @@ char	*get_env_value(char *cmd, int *i)
 				head = head->next;
 			}
 		}*/
-		printf("key : %s\n", key);
 		if (key[0] == '?')
 			value = insert_return_value(key);
 		else
 			value = ft_strdup(find_env_val(g_state.env_head, key));
 		free(key);
 	}
+	//printf("key : %s, c : %c, len : %d\n", key, cmd[*i], len);
 	return (changed_str(cmd, *i, *i + len, value));
 }
 
 static void	check_cmd_dollar_sign_loop(t_cmd *cmd, int i)
 {
 	int		j;
+	int		b_onset;
 	char	*buf;
 	//char	*tmp;
 
 	j = 0;
 	while (cmd->av[i][j])
 	{
+		b_onset = 0;
 		if (cmd->av[i][j] == ';' && cmd->av[i][j + 1] && cmd->av[i][j + 1] == '|')
 		{
 			j += 2;
@@ -143,14 +150,16 @@ static void	check_cmd_dollar_sign_loop(t_cmd *cmd, int i)
 					j++;
 				continue;
 			}*/
-			buf = get_env_value(cmd->av[i], &j);
+			buf = get_env_value(cmd->av[i], &j, &b_onset);
 			free(cmd->av[i]);
 			if (buf)
 			{
 				cmd->av[i] = ft_strdup(buf);
-				printf("buf : %s, cmd : %s\n", buf, cmd->av[i]);
+				//printf("buf : %s, cmd : %s\n", buf, cmd->av[i]);
 				free(buf);
 			}
+			if (cmd->av[i][j] && cmd->av[i][j] == '$' && !b_onset)
+				j--;
 		}
 		j++;
 	}
@@ -159,14 +168,14 @@ static void	check_cmd_dollar_sign_loop(t_cmd *cmd, int i)
 void	check_cmd_dollar_sign(t_cmd *cmd)
 {
 	int		i;
-	int		single_i;
-	char	*buf;
-	char	*tmp;
+	//int		single_i;
+	//char	*buf;
+	//char	*tmp;
 
 	i = 0;
 	while (cmd->av[i])
 	{
-		printf("av : %s\n ", cmd->av[i]);
+		//printf("av : %s\n ", cmd->av[i]);
 		/*if (cmd->av[i][0] == '\'')
 		{
 			buf = ft_strdup(&cmd->av[i][1]);
@@ -176,6 +185,7 @@ void	check_cmd_dollar_sign(t_cmd *cmd)
 		}*/
 		//else
 			check_cmd_dollar_sign_loop(cmd, i);
+		/*
 		while (1)
 		{
 			single_i = ft_strhas(cmd->av[i], ";|");
@@ -187,7 +197,16 @@ void	check_cmd_dollar_sign(t_cmd *cmd)
 			cmd->av[i] = ft_strjoin(buf, tmp);
 			free(buf);
 			free(tmp);
-			/*
+
+			single_i = ft_strchr_index(cmd->av[i], '\\');
+			if (single_i < 0)
+				break ;
+			buf = ft_substr(cmd->av[i], 0, single_i);
+			tmp = ft_substr(cmd->av[i], single_i + 1, ft_strlen(cmd->av[i]));
+			free(cmd->av[i]);
+			cmd->av[i] = ft_strjoin(buf, tmp);
+			free(buf);
+			free(tmp);
 			single_i = ft_strchr_index(cmd->av[i], '-');
 			if (single_i < 0)
 				break ;
@@ -197,9 +216,11 @@ void	check_cmd_dollar_sign(t_cmd *cmd)
 			cmd->av[i] = ft_strjoin(buf, tmp);
 			free(buf);
 			free(tmp);
-			*/
 		}
-		printf("dollar : %s\n", cmd->av[i]);
+		*/
+		//printf("dollar : %s\n", cmd->av[i]);
 		i++;
 	}
+	if (!ft_strcmp(cmd->av[0], "echo"))
+		remove_single(cmd);
 }

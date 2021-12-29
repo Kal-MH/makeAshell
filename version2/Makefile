@@ -6,7 +6,7 @@
 #    By: napark <napark@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/15 17:02:38 by napark            #+#    #+#              #
-#    Updated: 2021/12/29 01:38:14 by mkal             ###   ########.fr        #
+#    Updated: 2021/12/29 15:23:19 by mkal             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ SRCS	=	$(SRCS_PATH)/main.c $(SRCS_PATH)/signal.c \
 		$(EXECVE_PATH)/path.c $(EXECVE_PATH)/execve.c $(EXECVE_PATH)/builtin.c \
 		$(EXECVE_PATH)/execve_util.c $(EXECVE_PATH)/check_redirection.c\
 		$(EXECVE_PATH)/execve_util2.c $(EXECVE_PATH)/check_cmd_dollar_sign.c\
+		$(EXECVE_PATH)/remove_char.c \
 		$(UTIL_PATH)/string_util.c $(UTIL_PATH)/get_next_line.c $(UTIL_PATH)/free.c \
 		$(UTIL_PATH)/ft_str_func.c \
 		$(TERMINAL_PATH)/press_arrow2.c $(TERMINAL_PATH)/term.c \

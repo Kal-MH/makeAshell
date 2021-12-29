@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 05:11:32 by napark            #+#    #+#             */
-/*   Updated: 2021/12/29 01:53:37 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 15:35:58 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	execute_cmd2(t_state *s, t_cmd *cmd, char **envp)
 {
 	int	err;
 
+	remove_character(cmd);
 	if (!check_redirection(cmd))
 	{
 		s->ret = 1;

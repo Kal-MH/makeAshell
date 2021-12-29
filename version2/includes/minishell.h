@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:29:42 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 01:38:02 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 17:12:07 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,14 @@ void				execute_error(t_state *s, t_cmd *cmd, int type);
 **	check_cmd_dollar_sign
 */
 void				check_cmd_dollar_sign(t_cmd *cmd);
+
+/*
+**	remove_char
+*/
+void				remove_back(t_cmd *cmd);
+void				remove_back_one_line(char **cmd);
+void				remove_single(t_cmd *cmd);
+void				remove_character(t_cmd *cmd);
 
 /*
 **	execve_util2
