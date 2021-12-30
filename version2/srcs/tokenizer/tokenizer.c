@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 19:55:03 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 17:43:49 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 23:23:16 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	*trim_str(char *str, int type)
 		str[ft_strlen(str) - 1] = '\0';
 	else if (type == BACKSLASH
 		&& (str[1] == '\\' || !is_operator(str, 1)))
+		//&& (!is_operator(str, 1) || is_operator(str, 1) >= LEFT))
 	{
 		i = 0;
 		str[i] = str[i + 1];

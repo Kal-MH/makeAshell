@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/29 15:17:36 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 17:42:48 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 23:07:52 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,31 @@ void	remove_back(t_cmd *cmd)
 	}
 }
 
-void	remove_back_one_line(char **cmd)
+void	remove_back_one_line(t_cmd *cmd)
 {
 	char	*buf;
 	char	*tmp;
 	int		i;
+	int		j;
 
 	i = 0;
-	while (*cmd[i])
+	while (cmd->av[i])
 	{
-		if (*cmd[i] == '\\')
+		j = 0;
+		while (cmd->av[i][j])
 		{
-			buf = ft_substr(*cmd, 0, i);
-			tmp = ft_substr(*cmd, i + 1, ft_strlen(*cmd));
-			free(*cmd);
-			*cmd = ft_strjoin(buf, tmp);
-			free(buf);
-			free(tmp);
+			if (cmd->av[i][j] == '\\'
+					&& (cmd->av[i][j + 1]
+						&&(cmd->av[i][j + 1] != 'n' && cmd->av[i][j + 1] != 't')))
+			{
+				buf = ft_substr(cmd->av[i], 0, j);
+				tmp = ft_substr(cmd->av[i], j + 1, ft_strlen(cmd->av[i]));
+				free(cmd->av[i]);
+				cmd->av[i] = ft_strjoin(buf, tmp);
+				free(buf);
+				free(tmp);
+			}
+			j++;
 		}
 		i++;
 	}

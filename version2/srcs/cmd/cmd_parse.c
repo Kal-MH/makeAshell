@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 13:42:16 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 17:32:32 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 17:54:00 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	parse_cmd(t_state *state, int ac)
 void	make_cmd(t_token *start, int ac, int type, int i)
 {
 	char	**av;
-	char	*tmp;
+	//char	*tmp;
 
 	av = make_empty_av(ac);
 	while (start && i < ac && start->type != PIPE && start->type != SEMICOLON)
@@ -55,6 +55,8 @@ void	make_cmd(t_token *start, int ac, int type, int i)
 			make_cmd_condition(start, av, &i);
 			if (i < ac)
 			{
+				make_cmd_save(start, av, &i);
+				/*
 				tmp = ft_strjoin2(av[i], start->str);
 				free(av[i]);
 				av[i] = ft_strdup(tmp);
@@ -65,6 +67,7 @@ void	make_cmd(t_token *start, int ac, int type, int i)
 				}
 				free(av[i]);
 				av[i] = tmp;
+				*/
 			}
 		}
 		start = start->next;

@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 13:42:16 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 01:32:37 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 17:54:17 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,20 @@ void	make_cmd_condition(t_token *start, char **av, int *i)
 	}
 	else if (start->type == DOUBLE || start->type == COMMON)
 		check_backslash_and_env(&g_state, start);
+}
+
+void	make_cmd_save(t_token *start, char **av, int *i)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin2(av[*i], start->str);
+	free(av[*i]);
+	av[*i] = ft_strdup(tmp);
+	if (start->type == SINGLE)
+	{
+		free(tmp);
+		tmp = ft_strjoin(av[*i], ";|");
+	}
+	free(av[*i]);
+	av[*i] = tmp;
 }

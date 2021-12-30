@@ -6,7 +6,7 @@
 /*   By: mkal <mkal@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 17:29:42 by mkal              #+#    #+#             */
-/*   Updated: 2021/12/29 17:12:07 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 23:05:55 by mkal             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,15 +189,17 @@ int					check_redirection(t_cmd *cmd);
 void				execute_error(t_state *s, t_cmd *cmd, int type);
 
 /*
-**	check_cmd_dollar_sign
+**	check_cmd_dollar_sign & util
 */
 void				check_cmd_dollar_sign(t_cmd *cmd);
+int					check_dollar_key_len(char *str);
+char				*get_env_value(char *cmd, int *i, int *b_onset);
 
 /*
 **	remove_char
 */
 void				remove_back(t_cmd *cmd);
-void				remove_back_one_line(char **cmd);
+void				remove_back_one_line(t_cmd *cmd);
 void				remove_single(t_cmd *cmd);
 void				remove_character(t_cmd *cmd);
 
@@ -362,6 +364,7 @@ int					builtin(t_state *s, t_cmd *cmd);
 ** make_cmd_util
 */
 void				make_cmd_condition(t_token *start, char **av, int *i);
+void				make_cmd_save(t_token *start, char **av, int *i);
 
 /*
 **	cmd_parse
