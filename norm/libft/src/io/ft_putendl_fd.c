@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 15:12:55 by napark            #+#    #+#             */
-/*   Updated: 2021/12/12 15:12:56 by napark           ###   ########.fr       */
+/*   Created: 2021/12/30 00:14:58 by napark            #+#    #+#             */
+/*   Updated: 2021/12/30 00:14:59 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@ void	ft_putendl_fd(char *s, int fd)
 {
 	if (s == NULL)
 		return ;
-	ft_putstr_fd(s, fd);
-	ft_putchar_fd('\n', fd);
+	ft_putstr_fd(fd, s);
+	ft_putchar_fd(fd, '\n');
 }

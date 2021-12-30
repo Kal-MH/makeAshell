@@ -6,61 +6,68 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:03:47 by napark            #+#    #+#             */
-/*   Updated: 2021/12/29 14:35:22 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 23:52:57 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "brain.h"
 #include "expander_utils.h"
+#include "env_var_utils.h"
 
-static int	repinterprete_env_vars(t_par_tok *par_toks[], t_exp_tok *exp_toks[])
+int	handle_subshell(t_exp_tok *exp_tok)
 {
-	int	i;
-	int	j;
+	pid_t	pid;
+	int		status;
+	char	*cutted_cmd;
 
-	i = 0;
-	while (par_toks[i] && exp_toks[i] && par_toks[i]->type == std)
+	pid = fork();
+	if (pid < 0)
+		return (EXIT_FAILURE);
+	if (pid == 0)
 	{
-		j = 0;
-		while (exp_toks[i]->cmd[j])
-		{
-			exp_toks[i]->cmd[j] = interprete_env_var(exp_toks[i]->cmd[j]);
-			if (exp_toks[i]->cmd[j] == NULL)
-				return (EXIT_FAILURE);
-			j++;
-		}
-		i++;
+		cutted_cmd = ft_substr(exp_tok->cmd[0], 1, \
+		ft_strrchr(exp_tok->cmd[0], ')') - exp_tok->cmd[0] - 1);
+		if (cutted_cmd == NULL)
+			return (EXIT_FAILURE);
+		status = lexer(cutted_cmd);
+		free(cutted_cmd);
+		exit(get_err_code());
 	}
-	return (EXIT_SUCCESS);
+	waitpid(pid, &status, 0);
+	set_err_code(WEXITSTATUS(status));
+	return (WEXITSTATUS(status));
+}
+
+static bool	is_redir(t_par_tok *par_tok)
+{
+	if (par_tok->redir_type[is_in] || par_tok->redir_type[is_in_heredoc] \
+	|| par_tok->redir_type[is_out] || par_tok->redir_type[is_out_append] \
+	|| par_tok->redir_type[is_pipe])
+		return (true);
+	return (false);
 }
 
 static int	handle_tokens(t_exp_tok *exp_toks[], t_par_tok *par_toks[])
 {
 	int	i;
-	int	pipe_type;
 
 	i = 0;
 	while (exp_toks[i] && par_toks[i])
 	{
-		pipe_type = set_pipe_type(par_toks, i);
 		if (par_toks[i]->type == and || par_toks[i]->type == or)
 		{
 			if ((par_toks[i]->type == and && get_err_code() != EXIT_SUCCESS) \
 			|| (par_toks[i]->type == or && get_err_code() == EXIT_SUCCESS))
-			{
-				set_err_code(EXIT_FAILURE);
-				return (EXIT_SUCCESS);
-			}
-			if (repinterprete_env_vars(&par_toks[i + 1],
-					&exp_toks[i + 1]) == EXIT_FAILURE)
-				return (EXIT_FAILURE);
+				i++;
+			repinterprete_env_vars(&par_toks[i + 1], &exp_toks[i + 1]);
 		}
 		else if (par_toks[i]->type == subshell)
-			set_err_code(handle_subshell(exp_toks[i]->cmd[0]));
+			set_err_code(handle_subshell(exp_toks[i]));
 		else if (is_redir(par_toks[i]))
-			set_err_code(handle_redir(par_toks[i], exp_toks[i], pipe_type));
-		else
+			set_err_code(handle_redir(par_toks[i], exp_toks[i], \
+			set_pipe_type(par_toks, i)));
+		else if (exp_toks[i]->cmd != NULL)
 			set_err_code(executor(exp_toks[i]));
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:12:06 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:45:19 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/29 23:53:36 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	*find_home(t_env *envv)
 	path = get_env_var_value(envv, "HOME");
 	if (ft_strlen(path) == 0)
 	{
-		ft_putstr_fd("cd: HOME not set\n", STDERR_FILENO);
+		ft_fprintf(STDERR_FILENO, "cd: HOME not set\n");
 		ft_free_str(&path);
 	}
 	return (path);

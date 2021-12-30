@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 01:45:06 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:40:58 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/30 00:02:31 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,34 +48,6 @@ size_t	get_next_token_size(char *token, char next_special)
 			size++;
 			token++;
 		}
-	}
-	return (size);
-}
-
-size_t	get_new_tokens_size(char **tokens)
-{
-	size_t	size;
-	int		i;
-	int		j;
-
-	size = 0;
-	i = 0;
-	while (tokens[i])
-	{
-		if (token_is_subshell(tokens[i]))
-			i = jump_to_end_of_subshell(tokens, i) - 1;
-		else if (token_is_unadjusted(tokens[i]))
-		{
-			j = 0;
-			while (tokens[i][j])
-			{
-				if (is_special_char(tokens[i][j], tokens[i][j + 1]))
-					size += 2;
-				j++;
-			}
-		}
-		size++;
-		i++;
 	}
 	return (size);
 }

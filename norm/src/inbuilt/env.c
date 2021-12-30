@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:12:35 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:45:34 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/29 23:54:10 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,10 @@ int	env(char **argv)
 	{
 		if (access(argv[1], F_OK) == 0)
 		{
-			ft_putstr_fd("env: ", STDERR_FILENO);
-			ft_putstr_fd(argv[1], STDERR_FILENO);
-			ft_putstr_fd(": Permission denied\n", STDERR_FILENO);
+			ft_fprintf(STDERR_FILENO, "env: %s: Premission denied\n", argv[1]);
 			return (126);
 		}
-		ft_putstr_fd("env: ", STDERR_FILENO);
-		ft_putstr_fd(argv[1], STDERR_FILENO);
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+		ft_fprintf(2, "env: %s: No such file or directory\n", argv[1]);
 		return (127);
 	}
 	i = 0;

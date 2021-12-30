@@ -5,17 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 15:19:07 by napark            #+#    #+#             */
-/*   Updated: 2021/12/12 15:19:08 by napark           ###   ########.fr       */
+/*   Created: 2021/12/30 00:22:31 by napark            #+#    #+#             */
+/*   Updated: 2021/12/30 00:22:35 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-will append s2 to s1
-will not free s1 afterwards
-*/
 char	*ft_strjoin(char *s1, const char *s2)
 {
 	char	*joined;

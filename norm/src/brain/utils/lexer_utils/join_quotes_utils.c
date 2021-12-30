@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 01:43:38 by napark            #+#    #+#             */
-/*   Updated: 2021/12/17 21:28:08 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/30 00:01:56 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,15 +105,16 @@ int	token_join_all_starts(char ***tokens, t_quotes *quo, int i)
 {
 	int	check;
 
-	if (ft_strchr(quo->start + 1, *quo->quote) != NULL)
+	if (quo == NULL)
+		return (EXIT_FAILURE);
+	if (ft_strchr(quo->start + 1, *quo->quote) != NULL \
+	&& ft_strcmp((*tokens)[i], quo->start) == 0)
 	{
 		if (special_start(tokens, quo, i) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 		else
 			return (EXIT_SUCCESS);
 	}
-	if (quo == NULL)
-		return (EXIT_FAILURE);
 	if (quo->len > 0)
 	{
 		check = start_one(tokens, quo);

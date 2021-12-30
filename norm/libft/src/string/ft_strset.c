@@ -5,17 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 15:20:13 by napark            #+#    #+#             */
-/*   Updated: 2021/12/12 15:20:14 by napark           ###   ########.fr       */
+/*   Created: 2021/12/30 00:23:26 by napark            #+#    #+#             */
+/*   Updated: 2021/12/30 00:23:30 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* 
- * Returns the first found character of set in str 
- * or NULL if no character of set is found in str 
- */
 char	*ft_strset(char *str, char *set)
 {
 	int	i;

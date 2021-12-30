@@ -6,14 +6,22 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 01:41:07 by napark            #+#    #+#             */
-/*   Updated: 2021/12/29 14:10:36 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 23:59:39 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "brain.h"
 #include "expander_utils.h"
+#include <readline/history.h>
+#include <readline/readline.h>
 
+/**
+ * @brief  Gets heredoc to wait for
+ * @note
+ * @param  *par_tok:
+ * @retval char pointer to (by parser) allocated heredoc
+ */
 static char	*get_heredoc(t_par_tok *par_tok)
 {
 	int	i;
@@ -28,74 +36,54 @@ static char	*get_heredoc(t_par_tok *par_tok)
 	return (NULL);
 }
 
+static int	exit_close_fds(int fd1, int fd2, int exit_status)
+{
+	if (fd1 != -1)
+		close(fd1);
+	if (fd1 != -1)
+		close(fd2);
+	return (exit_status);
+}
+
+static void	wait_for_heredoc_help(t_exp_tok *exp_tok)
+{
+	if (exp_tok->cmd == NULL && exp_tok->out != STDOUT_FILENO)
+	{
+		close(exp_tok->out);
+		exp_tok->out = STDOUT_FILENO;
+	}
+}
+
 /**
  * @brief  Waits in readline-prompt as long as heredoc is not typed
  * @note
  * @param  *par_tok:
  * @retval int to indicate success or failure
  */
-int	wait_for_heredoc(t_par_tok *par_tok, t_exp_tok *exp_tok)
+int	wait_for_heredoc(
+	t_par_tok *par_tok, t_exp_tok *exp_tok, char *buf, char *heredoc
+	)
 {
-	char	*buf;
-	char	*heredoc;
 	int		end[2];
 
 	if (pipe(end) == -1)
-	{
-		perror("Error");
-		return (EXIT_FAILURE);
-	}
+		return (ft_perror(EXIT_FAILURE, "pipe error"));
 	exp_tok->in = end[0];
 	heredoc = get_heredoc(par_tok);
 	if (heredoc == NULL)
-	{
-		close(end[0]);
-		close(end[1]);
-		return (EXIT_FAILURE);
-	}
+		return (exit_close_fds(end[0], end[1], EXIT_FAILURE));
 	while (true)
 	{
 		buf = readline("> ");
 		if (buf == NULL)
-		{
-			if (close(end[1]) != 0)
-			{
-				close(end[0]);
-				return (EXIT_FAILURE);
-			}
-			return (EXIT_SUCCESS);
-		}
+			return (exit_close_fds(end[1], -1, EXIT_SUCCESS));
 		if (ft_strcmp(buf, heredoc) == 0)
 			break ;
-		write(end[1], buf, ft_strlen(buf));
-		write(end[1], "\n", 1);
+		ft_fprintf(end[1], "%s\n", buf);
 		free(buf);
 	}
 	free(buf);
-	if (close(end[1]) != 0)
-	{
-		close(end[0]);
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
-
-/**
- * @brief  Searches for heredoc in par_toks and waits if found
- * @note
- * @param  *par_toks[]:
- * @retval int to indicate success or failure
- */
-int	check_for_heredoc(t_par_tok *par_toks[])
-{
-	int	i;
-
-	i = 0;
-	while (par_toks[i])
-	{
-		if (par_toks[i]->redir_type[is_in_heredoc])
-			return (wait_for_heredoc(par_toks[i], NULL));
-		i++;
-	}
+	close(end[1]);
+	wait_for_heredoc_help(exp_tok);
 	return (EXIT_SUCCESS);
 }

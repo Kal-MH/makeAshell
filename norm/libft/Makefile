@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: toni <toni@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/12/12 15:42:28 by napark            #+#    #+#              #
-#    Updated: 2021/12/17 21:30:19 by napark           ###   ########.fr        #
+#    Created: 2021/11/02 15:48:40 by tblaase           #+#    #+#              #
+#    Updated: 2021/12/14 16:48:00 by toni             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ ARFLAGS = -crs
 
 # Locations
 SRC_IO = \
+	ft_fprintf.c ft_putlhex_fd.c ft_putlnbr_fd.c ft_putptr_fd.c \
+	ft_putuhex_fd.c ft_putunbr_fd.c \
 	ft_printf.c ft_putchar_fd.c ft_putchar.c ft_putendl_fd.c ft_putlhex.c ft_putlnbr.c \
 	ft_putnbr.c ft_putptr.c ft_putstr_fd.c ft_putstr.c ft_putuhex.c ft_putunbr.c \
 	ft_puterror.c ft_putstderr.c ft_putnbr_fd.c
@@ -40,7 +42,8 @@ SRC_STRING = \
 	ft_str_arr_dup.c ft_str_arr_len.c ft_realloc_str.c ft_realloc_str_arr.c ft_strstrjoin.c ft_strclen.c \
 	ft_append_len_div.c ft_in_front_div.c ft_str_arr_realloc.c ft_add_single_str.c ft_sort_str_arr.c
 SRC_UTILS = \
-	ft_free.c ft_hexnbrlen.c ft_nbrlen.c ft_free_str_array.c ft_free_str.c ft_free_split.c ft_free_single_str.c
+	ft_free.c ft_hexnbrlen.c ft_nbrlen.c ft_free_str_array.c ft_free_str.c ft_free_split.c ft_free_single_str.c \
+	ft_perror.c
 
 OBJ_DIR = ./obj
 

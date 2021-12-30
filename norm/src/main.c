@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/12 15:09:04 by napark            #+#    #+#             */
-/*   Updated: 2021/12/29 00:21:02 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/30 00:06:16 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	exit_routine(void *to_free, int exit_status)
 		exit_inbuilt(args);
 		ft_free_split(args);
 	}
-	rl_clear_history();
+	clear_history();
 	free(to_free);
 	free_envv(get_envv());
 	return (exit_status);

@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:16:58 by napark            #+#    #+#             */
-/*   Updated: 2021/12/29 14:41:35 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 23:51:19 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 # define EXPANDER_UTILS_H
 
 char	*interprete_env_var(char *lex_tok);
-
-// EXPANDER_SUB
-int		free_exp_toks(t_exp_tok *exp_toks[], int exit_status);
-size_t	get_tok_size(t_par_tok *par_toks[]);
-int		get_tokens_expander(t_par_tok *par_toks[]);
-char	*get_subshell_cmd(char *cmd);
-
-// EXPANDER_SUB2
-int		handle_subshell(char *cmd);
-bool	is_redir_expander(t_par_tok *par_tok);
 
 // HEREDOC UTILS
 

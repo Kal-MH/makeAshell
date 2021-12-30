@@ -5,14 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 15:16:07 by napark            #+#    #+#             */
-/*   Updated: 2021/12/12 15:16:07 by napark           ###   ########.fr       */
+/*   Created: 2021/12/30 00:19:08 by napark            #+#    #+#             */
+/*   Updated: 2021/12/30 00:19:09 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* Appends src to dst, frees dst and returns newly created string */
 char	*ft_append(char **dst, char *src)
 {
 	char	*dst_buf;
@@ -25,7 +24,10 @@ char	*ft_append(char **dst, char *src)
 		dst_buf = *dst;
 	appendet_len = ft_strlen(dst_buf) + ft_strlen(src);
 	if (appendet_len == 0)
+	{
+		ft_free((void *)dst);
 		return (NULL);
+	}
 	appendet = malloc((appendet_len + 1) * sizeof(*appendet));
 	if (appendet == NULL)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:01:14 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:39:30 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/30 00:03:56 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,85 +15,48 @@
 #include "parser_utils.h"
 #include "env_var_utils.h"
 
-static char	**get_next_item(char *n, char *items[], size_t *it_siz, size_t *i)
+static char	*get_env_variable(char *lex_tok, char *var)
 {
-	if (*it_siz == (*i + 2))
-	{
-		*it_siz += 10;
-		items = ft_realloc_str_arr(items, *it_siz);
-		if (items == NULL)
-			return (NULL);
-	}
-	items[*i] = ft_strdup(n);
-	if (items[*i] == NULL)
-		return (ft_free_split(items));
-	(*i)++;
-	return (items);
-}
-
-static char	*get_items_sorted(char **unsorted)
-{
-	char	*items;
+	char	*env_var;
+	char	*var_value;
 	int		i;
 
-	unsorted = ft_sort_str_arr(unsorted);
-	i = 0;
-	while (unsorted[i])
-	{
-		items = ft_append(&items, unsorted[i]);
-		if (items == NULL)
-			return (ft_free_split(unsorted));
-		items = ft_append(&items, " ");
-		if (items == NULL)
-			return (ft_free_split(unsorted));
+	var_value = get_env_var_value(get_envv(), var);
+	free(var);
+	if (var_value == NULL)
+		return (NULL);
+	env_var = ft_calloc(ft_strlen(lex_tok) + ft_strlen(var_value) + 1, 1);
+	if (env_var == NULL)
+		return (NULL);
+	i = -1;
+	while (lex_tok[++i] && lex_tok[i] != '$')
+		env_var[i] = lex_tok[i];
+	env_var = ft_append(&env_var, var_value);
+	if (env_var == NULL)
+		return (var_value);
+	while ((lex_tok[i] == '$') || (lex_tok[i] && ft_isalpha(lex_tok[i])))
 		i++;
-	}
-	ft_free_split(unsorted);
-	return (items);
-}
-
-static char	*get_dir_items(void)
-{
-	DIR				*d;
-	struct dirent	*dir;
-	char			**items;
-	size_t			items_size;
-	size_t			i;
-
-	d = opendir(".");
-	if (d == NULL)
+	env_var = ft_append(&env_var, lex_tok + i);
+	if (env_var == NULL)
 		return (NULL);
-	i = 0;
-	items_size = 10;
-	dir = readdir(d);
-	items = ft_calloc(items_size + 1, sizeof(*items));
-	if (items == NULL)
-		return (NULL);
-	while (dir != NULL)
-	{
-		if (dir->d_name[0] != '.')
-			items = get_next_item(dir->d_name, items, &items_size, &i);
-		if (items == NULL)
-			return (NULL);
-		dir = readdir(d);
-	}
-	closedir(d);
-	return (get_items_sorted(items));
+	free(var_value);
+	return (env_var);
 }
 
 static char	*get_var(char *lex_tok)
 {
 	char	*var;
+	char	*lex_buf;
 	int		i;
 
-	var = ft_calloc(ft_strlen(lex_tok) + 1, sizeof(*var));
+	lex_buf = lex_tok;
+	var = ft_calloc(ft_strlen(lex_buf) + 1, sizeof(*var));
 	if (var == NULL)
 		return (NULL);
-	lex_tok = ft_strchr(lex_tok, '$') + 1;
+	lex_buf = ft_strchr(lex_buf, '$') + 1;
 	i = 0;
-	while (lex_tok && *lex_tok && ft_isalpha(*lex_tok))
-		var[i++] = *lex_tok++;
-	free(lex_tok);
+	while (lex_buf && *lex_buf && ft_isalpha(*lex_buf))
+		var[i++] = *lex_buf++;
 	return (var);
 }
 
@@ -106,10 +69,9 @@ static char	*get_var(char *lex_tok)
 char	*interprete_env_var(char *lex_tok)
 {
 	char	*interpreted_token;
-	char	*var;
 
 	interpreted_token = lex_tok;
-	if (!ft_strchr(lex_tok, '\'') && ft_strlen(lex_tok) > 1 \
+	if (lex_tok[0] != '\'' && ft_strlen(lex_tok) > 1 \
 	&& ft_strchr(lex_tok, '$'))
 	{
 		if (ft_strstr(lex_tok, "$?"))
@@ -117,14 +79,12 @@ char	*interprete_env_var(char *lex_tok)
 			free(lex_tok);
 			return (ft_itoa(get_err_code()));
 		}
-		var = get_var(lex_tok);
-		if (var == NULL)
-			return (NULL);
-		interpreted_token = get_env_var_value(get_envv(), var);
-		free(var);
+		interpreted_token = get_env_variable(lex_tok, get_var(lex_tok));
+		free(lex_tok);
+		return (interpreted_token);
 	}
 	if (!ft_strchr(lex_tok, '\'') && !ft_strchr(lex_tok, '\"') \
-	&& ft_strchr(lex_tok, '*'))
+	&& ft_strcmp(lex_tok, "*\0") == 0)
 	{
 		free(lex_tok);
 		return (get_dir_items());

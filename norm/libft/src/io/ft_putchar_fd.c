@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 15:12:40 by napark            #+#    #+#             */
-/*   Updated: 2021/12/12 15:12:43 by napark           ###   ########.fr       */
+/*   Created: 2021/12/30 00:14:43 by napark            #+#    #+#             */
+/*   Updated: 2021/12/30 00:14:44 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putchar_fd(char c, int fd)
+int	ft_putchar_fd(char c, int fd)
 {
-	write(fd, &c, 1);
+	return (write(fd, &c, 1));
 }

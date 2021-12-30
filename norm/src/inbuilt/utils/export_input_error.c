@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:09:32 by napark            #+#    #+#             */
-/*   Updated: 2021/12/14 00:09:44 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/29 23:55:35 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ static int	export_error_loop(char **var, char **argv)
 	{
 		if (ft_isalnum((*var)[j]) == 0 && (*var)[j] != '_')
 		{
-			ft_putstr_fd("export: ", STDERR_FILENO);
-			ft_putstr_fd(argv[1], STDERR_FILENO);
-			ft_putstr_fd(": not a valid identifier\n", STDERR_FILENO);
+			ft_fprintf(2, "export: %s: not a valid identifier\n", argv[1]);
 			ft_free_str(var);
 			return (EXIT_FAILURE);
 		}

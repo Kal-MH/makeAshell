@@ -5,14 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 15:18:52 by napark            #+#    #+#             */
-/*   Updated: 2021/12/12 15:19:03 by napark           ###   ########.fr       */
+/*   Created: 2021/12/30 00:22:18 by napark            #+#    #+#             */
+/*   Updated: 2021/12/30 00:22:22 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/* Returns true if set is included in str, if not returns false */
 int	ft_strhas(char *str, char *set)
 {
 	int	i;

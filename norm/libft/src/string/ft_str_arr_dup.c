@@ -5,18 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 15:18:07 by napark            #+#    #+#             */
-/*   Updated: 2021/12/12 15:18:08 by napark           ###   ########.fr       */
+/*   Created: 2021/12/30 00:21:25 by napark            #+#    #+#             */
+/*   Updated: 2021/12/30 00:21:29 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-strdup for string arrays
-arr: the array to copy
-cpy: the copied array that gets returned
-*/
 char	**ft_str_arr_dup(char **arr)
 {
 	char	**cpy;

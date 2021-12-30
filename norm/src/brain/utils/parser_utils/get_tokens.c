@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:00:07 by napark            #+#    #+#             */
-/*   Updated: 2021/12/29 14:14:00 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/30 00:03:45 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,6 @@ int	get_tok_cmd(char *lex_tok, t_par_tok *par_tok, t_iter *iter)
 	return (EXIT_SUCCESS);
 }
 
-/**
- * @brief  Trys to get out and in redirections from current lexer token
- * @note   
- * @param  *lex_toks[]: Lexer tokens
- * @param  *iter: Iterator of parser, lexer, cmd, in, out
- * @retval int to indicate success or failure
- */
 int	get_tok_redir(char *lex_toks[], t_iter *iter)
 {
 	int		i;
@@ -72,15 +65,6 @@ int	get_tok_redir(char *lex_toks[], t_iter *iter)
 	return (EXIT_SUCCESS);
 }
 
-/**
- * @brief  Trys to get a special delimiter token from current lexer token
- * @note   Creates new parser token if needed
- * @note   Sepcial Delimiter tokens include: and, or, subshell
- * @param  *lex_toks[]: Lexer tokens
- * @param  *par_toks[]: Parser tokens
- * @param  *iter: Iterator of parser, lexer, cmd, in, out
- * @retval int to indicate success, failure or break
- */
 int	get_special_tok(char *lex_tok, t_par_tok *par_toks[], t_iter *iter)
 {
 	if (lex_tok == NULL)
@@ -105,14 +89,6 @@ int	get_special_tok(char *lex_tok, t_par_tok *par_toks[], t_iter *iter)
 	return (EXIT_SUCCESS);
 }
 
-/**
- * @brief  Trys to get token type from current lexer token
- * @note   Token types include: pipe, in- out- out-append-redirections and
- * * heredoc
- * @param  *lex_tok: Current lexer token
- * @param  *iter: Iterator of parser, lexer, cmd, in, out
- * @retval int to indicate failure or success
- */
 int	get_tok_type(char *lex_tok, t_iter *iter)
 {
 	t_par_tok	*par_tok;
@@ -135,7 +111,8 @@ int	get_tok_type(char *lex_tok, t_iter *iter)
 		par_tok->redir_type[is_in_heredoc] = true;
 	if (ft_strlen(lex_tok) == 2 && ft_strstr(lex_tok, ">>"))
 		par_tok->redir_type[is_out_append] = true;
-	if (ft_strchr(lex_tok, '(') && ft_strchr(lex_tok, ')'))
+	if ((lex_tok[0] != '\'' && lex_tok[0] != '\"') \
+	&& (ft_strchr(lex_tok, '(') && ft_strchr(lex_tok, ')')))
 		par_tok->type = subshell;
 	return (EXIT_SUCCESS);
 }

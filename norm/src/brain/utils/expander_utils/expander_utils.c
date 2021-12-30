@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander_sub.c                                     :+:      :+:    :+:   */
+/*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/14 00:03:47 by napark            #+#    #+#             */
-/*   Updated: 2021/12/29 14:33:37 by mkal             ###   ########.fr       */
+/*   Created: 2021/12/29 00:25:51 by napark            #+#    #+#             */
+/*   Updated: 2021/12/29 23:59:05 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,44 +14,28 @@
 #include "brain.h"
 #include "expander_utils.h"
 
-int	free_exp_toks(t_exp_tok *exp_toks[], int exit_status)
+int	repinterprete_env_vars(t_par_tok *par_toks[], t_exp_tok *exp_toks[])
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	while (exp_toks[i])
+	while (par_toks[i] && exp_toks[i] && par_toks[i]->type == std)
 	{
-		ft_free_str_array(&exp_toks[i]->cmd);
-		free(exp_toks[i]);
+		j = 0;
+		while (exp_toks[i]->cmd[j])
+		{
+			exp_toks[i]->cmd[j] = interprete_env_var(exp_toks[i]->cmd[j]);
+			if (exp_toks[i]->cmd[j] == NULL)
+				return (EXIT_FAILURE);
+			j++;
+		}
 		i++;
 	}
-	free(exp_toks);
-	reset_exp_toks();
-	return (exit_status);
-}
-
-size_t	get_tok_size(t_par_tok *par_toks[])
-{
-	size_t	size;
-
-	size = 0;
-	while (par_toks[size])
-		size++;
-	return (size);
-}
-
-static int	init(t_exp_tok **exp_tok)
-{
-	*exp_tok = malloc(sizeof(**exp_tok));
-	if (*exp_tok == NULL)
-		return (EXIT_FAILURE);
-	(*exp_tok)->cmd = NULL;
-	(*exp_tok)->in = 0;
-	(*exp_tok)->out = 1;
 	return (EXIT_SUCCESS);
 }
 
-int	get_tokens_expander(t_par_tok *par_toks[])
+int	get_tokens(t_par_tok *par_toks[])
 {
 	t_exp_tok	**exp_toks;
 	int			i;
@@ -72,31 +56,47 @@ int	get_tokens_expander(t_par_tok *par_toks[])
 				return (free_exp_toks(exp_toks, EXIT_FAILURE));
 		}
 		if (par_toks[i]->redir_type[is_in_heredoc])
-			if (wait_for_heredoc(par_toks[i], exp_toks[i]) == EXIT_FAILURE)
+			if (wait_for_heredoc(par_toks[i], exp_toks[i], NULL, NULL) == 1)
 				return (free_exp_toks(exp_toks, EXIT_FAILURE));
 		i++;
 	}
 	return (EXIT_SUCCESS);
 }
 
-char	*get_subshell_cmd(char *cmd)
+int	init(t_exp_tok **exp_tok)
 {
-	char	*subshell_cmd;
-	int		cmd_len;
-	int		i;
-	int		j;
+	*exp_tok = malloc(sizeof(**exp_tok));
+	if (*exp_tok == NULL)
+		return (EXIT_FAILURE);
+	(*exp_tok)->cmd = NULL;
+	(*exp_tok)->in = 0;
+	(*exp_tok)->out = 1;
+	(*exp_tok)->is_pipe = false;
+	return (EXIT_SUCCESS);
+}
 
-	cmd_len = ft_strlen(cmd);
-	subshell_cmd = ft_calloc(cmd_len + 1, sizeof(*subshell_cmd));
-	if (subshell_cmd == NULL)
-		return (NULL);
-	i = 1;
-	j = 0;
-	while (i < cmd_len - 2)
+size_t	get_tok_size(t_par_tok *par_toks[])
+{
+	size_t	size;
+
+	size = 0;
+	while (par_toks[size])
+		size++;
+	return (size);
+}
+
+int	free_exp_toks(t_exp_tok *exp_toks[], int exit_status)
+{
+	int	i;
+
+	i = 0;
+	while (exp_toks[i])
 	{
-		subshell_cmd[j] = cmd[i];
+		ft_free_str_array(&exp_toks[i]->cmd);
+		free(exp_toks[i]);
 		i++;
-		j++;
 	}
-	return (subshell_cmd);
+	free(exp_toks);
+	reset_exp_toks();
+	return (exit_status);
 }

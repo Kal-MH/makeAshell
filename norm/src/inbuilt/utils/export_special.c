@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:10:31 by napark            #+#    #+#             */
-/*   Updated: 2021/12/29 14:19:02 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 23:56:43 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,6 @@ int	export_wd(t_env *envv, t_export *exp, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-/*
-will check if you exported PWD or OLDPWD without an =, therefore without
-a value and then add the stored value of the correct variable to it
-returns 2 if its PWD that needs to be added
-returns 3 if its OLDPWD that needs to be added
-returns EXIT_FAILURE if nothing needs to be done because it has a value
-*/
 int	export_special(t_env *envv, t_export *exp)
 {
 	if (envv->env_var == NULL)

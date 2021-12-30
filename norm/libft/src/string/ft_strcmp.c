@@ -5,15 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 15:18:36 by napark            #+#    #+#             */
-/*   Updated: 2021/12/12 15:18:41 by napark           ###   ########.fr       */
+/*   Created: 2021/12/30 00:22:02 by napark            #+#    #+#             */
+/*   Updated: 2021/12/30 00:22:06 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-/* returns the value of the difference found in two strings, 0 if equal */
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	const unsigned char	*buf1;

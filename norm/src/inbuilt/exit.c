@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:13:29 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:35:53 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/29 23:54:23 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@ static bool	is_valid_exit_arg(char *args[])
 	int	j;
 
 	i = 0;
-	while (args[i])
+	while (args && args[i])
 	{
 		j = 0;
 		while (args[i][j])
 		{
+			if (ft_issign(args[i][j]))
+				j++;
 			if (!ft_isdigit(args[i][j]))
 				return (false);
 			j++;
@@ -34,24 +36,29 @@ static bool	is_valid_exit_arg(char *args[])
 
 int	exit_inbuilt(char *args[])
 {
-	int	exit_code;
+	long	exit_code;
+	int		i;
 
-	if (ft_strncmp(*args, "exit", ft_strlen(*args)) != 0)
+	i = 0;
+	if (ft_strncmp(args[i], "exit", ft_strlen(args[i])) != 0)
 		return (EXIT_FAILURE);
-	args++;
-	exit_code = ft_atoi(*args);
-	if (!is_valid_exit_arg(args))
+	i++;
+	if (args[i])
+		exit_code = ft_atol(args[i]);
+	else
+		exit_code = get_err_code();
+	if (!is_valid_exit_arg(args + i) || ft_strlen(args[i]) > 19)
 	{
-		ft_putstr_fd("exit: not a valid argument\n", STDERR_FILENO);
+		ft_fprintf(STDERR_FILENO, "exit: not a valid argument\n");
 		exit_code = 255;
 	}
-	if (*(++args))
+	else if (args[i] && args[++i])
 	{
-		ft_putstr_fd("exit: too many arguments\n", STDERR_FILENO);
-		printf("exit\n");
+		ft_fprintf(STDERR_FILENO, "exit: too many arguments\n");
+		ft_fprintf(STDERR_FILENO, "exit\n");
 		return (EXIT_FAILURE);
 	}
-	printf("exit\n");
+	ft_fprintf(STDERR_FILENO, "exit\n");
 	exit(exit_code);
 	return (exit_code);
 }

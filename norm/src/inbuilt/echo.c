@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:12:22 by napark            #+#    #+#             */
-/*   Updated: 2021/12/14 00:12:32 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/29 23:53:56 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	echo(char **args)
 	{
 		if (printf("%s", *args) != ft_strlen(*args))
 			return (EXIT_FAILURE);
-		if (*(args + 1) != NULL)
+		if (ft_strlen(*args) != 0 && *(args + 1) != NULL)
 			if (printf(" ") != ft_strlen(" "))
 				return (EXIT_FAILURE);
 		args++;

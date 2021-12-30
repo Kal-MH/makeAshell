@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:13:44 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:45:48 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/29 23:54:53 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 #include "env_var_utils.h"
 #include "inbuilt_utils.h"
 
-/*
-will reallocate env_var for one additional element
-will append the new element
-*/
 static int	ft_export_new(t_env *envv, t_export *exp, char **argv)
 {
 	if (envv->env_var[exp->i] == NULL)
@@ -35,9 +31,6 @@ static int	ft_export_new(t_env *envv, t_export *exp, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-/*
-will change the value of the found element
-*/
 static int	ft_export_found(t_env *envv, t_export *exp, char **argv)
 {
 	int	check;
@@ -79,9 +72,6 @@ static void	ft_split_var(t_export *exp, char **argv)
 	}
 }
 
-/*
-loops through all arguments and triggers either export_found or export_new
-*/
 static int	ft_export_loop(t_env *envv, t_export *exp, char **argv)
 {
 	int		check;

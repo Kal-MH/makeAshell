@@ -5,16 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 15:15:56 by napark            #+#    #+#             */
-/*   Updated: 2021/12/12 15:15:57 by napark           ###   ########.fr       */
+/*   Created: 2021/12/30 00:18:44 by napark            #+#    #+#             */
+/*   Updated: 2021/12/30 00:18:59 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-add new after (*arr)[pos]
-*/
 char	**ft_add_single_str(char ***arr, int pos, char *new)
 {
 	int		i;

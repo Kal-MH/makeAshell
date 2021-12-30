@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 01:44:37 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:40:49 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/30 00:02:20 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*get_end_of_subshell(char *tokens[], int *i, char *sub_tok)
 	char	*tmp;
 	int		sub_len;
 
-	sub_len = ft_strchr(tokens[*i], ')') - tokens [*i];
+	sub_len = ft_strrchr(tokens[*i], ')') - tokens [*i];
 	tmp = ft_substr(tokens[*i], 0, sub_len + 1);
 	sub_tok = ft_append(&sub_tok, tmp);
 	free(tmp);

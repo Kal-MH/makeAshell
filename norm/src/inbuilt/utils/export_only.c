@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:09:59 by napark            #+#    #+#             */
-/*   Updated: 2021/12/29 14:19:19 by mkal             ###   ########.fr       */
+/*   Updated: 2021/12/29 23:56:02 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ static int	ft_sort_loop(char **env_var_cpy, int i, int j)
 	return (EXIT_SUCCESS);
 }
 
-/*
-will print the variables with their value just as export does
-*/
 static int	ft_print_with_value(char **env_var_cpy, int i)
 {
 	int	j;
@@ -76,9 +73,6 @@ static int	ft_print_with_value(char **env_var_cpy, int i)
 	return (EXIT_SUCCESS);
 }
 
-/*
-mimics the behavior of calling export without any arguments
-*/
 int	export_only(t_env *environment)
 {
 	char	**env_var_cpy;

@@ -6,7 +6,7 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 01:04:39 by napark            #+#    #+#             */
-/*   Updated: 2021/12/15 00:38:31 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/29 23:53:08 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static char	*get_subshell_token(char *tokens[], int *i)
 	subshell_count = get_subshell_count(tokens, *i);
 	while (tokens[*i] && subshell_count)
 	{
-		if (ft_strchr(tokens[*i], ')') && !ft_strstr(tokens[*i], ")\0") \
-		&& subshell_count == 1)
+		if (subshell_count == 1 && ft_strchr(tokens[*i], ')') \
+		&& ft_strlen(ft_strrchr(tokens[*i], ')')) != 1)
 			return (get_end_of_subshell(tokens, i, subshell_token));
 		subshell_token = ft_append(&subshell_token, tokens[*i]);
 		if (subshell_token == NULL)
@@ -68,7 +68,7 @@ static char	*get_subshell_token(char *tokens[], int *i)
 		subshell_token = ft_append(&subshell_token, " ");
 		if (subshell_token == NULL)
 			return (NULL);
-		if (token_is_subshell(tokens[*i]))
+		if (ft_strchr(tokens[*i], '(') || ft_strchr(tokens[*i], ')'))
 			subshell_count--;
 		(*i)++;
 	}
@@ -78,25 +78,27 @@ static char	*get_subshell_token(char *tokens[], int *i)
 static char	**adjust_tokens(char **tokens)
 {
 	char	**adjusted;
-	int		i;
-	int		j;
+	size_t	adjusted_size;
+	int		i[2];
 
-	adjusted = ft_calloc(get_new_tokens_size(tokens) + 1, sizeof(*adjusted));
+	adjusted_size = 50;
+	adjusted = ft_calloc(adjusted_size + 1, sizeof(*adjusted));
 	if (adjusted == NULL)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (tokens[i])
+	i[0] = 0;
+	i[1] = 0;
+	while (tokens[i[0]])
 	{
-		if (token_is_subshell(tokens[i]))
-			adjusted[j] = get_subshell_token(tokens, &i);
-		else if (!token_is_unadjusted(tokens[i]))
-			adjusted[j] = ft_strdup(tokens[i++]);
+		if (tokens[i[0]][0] == '(')
+			adjusted[i[1]] = get_subshell_token(tokens, &i[0]);
+		else if (!token_is_unadjusted(tokens[i[0]]))
+			adjusted[i[1]] = ft_strdup(tokens[i[0]++]);
 		else
-			adjusted[j] = get_next_token(&tokens[i]);
-		if (adjusted[j] == NULL)
+			adjusted[i[1]] = get_next_token(&tokens[i[0]]);
+		if (adjusted[i[1]++] == NULL)
 			return (free_tokens(tokens, adjusted));
-		j++;
+		if ((size_t)i[1] == adjusted_size - 1)
+			adjusted = ft_str_arr_realloc(adjusted, adjusted_size += 10);
 	}
 	ft_free_str_array(&tokens);
 	return (adjusted);
@@ -107,25 +109,22 @@ int	lexer(char *line)
 	char	**tokens;
 	int		exit_status;
 
+	if (!is_valid_line_syntax(line))
+		return (exit_on_syntax_error());
 	tokens = ft_split_set(line, " \t\r\v\f\n");
 	if (join_quotes(&tokens) == EXIT_FAILURE)
 	{
 		ft_free_str_array(&tokens);
 		return (EXIT_FAILURE);
 	}
-	if (tokens == NULL)
-		return (EXIT_FAILURE);
 	tokens = adjust_tokens(tokens);
 	if (tokens == NULL)
 		return (EXIT_FAILURE);
 	set_lex_toks(tokens);
 	if (!is_valid_syntax(tokens))
-	{
-		ft_putstr_fd("minishell: Invalid Syntax at unspecified token\n", 2);
-		ft_free_str_array(&tokens);
-		return (EXIT_SYNTAX_ERROR);
-	}
+		return (exit_on_syntax_error());
 	exit_status = parser(tokens);
-	ft_free_str_array(&tokens);
+	ft_free_split(tokens);
+	reset_lex_toks();
 	return (exit_status);
 }

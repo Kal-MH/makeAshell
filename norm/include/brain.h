@@ -6,13 +6,14 @@
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 00:16:20 by napark            #+#    #+#             */
-/*   Updated: 2021/12/29 00:18:14 by napark           ###   ########.fr       */
+/*   Updated: 2021/12/30 00:07:11 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BRAIN_H
 # define BRAIN_H
 
+# include <stdio.h>
 # include <stdlib.h>
 # include <sys/wait.h>
 # include <sys/types.h>

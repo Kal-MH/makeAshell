@@ -5,17 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 15:16:32 by napark            #+#    #+#             */
-/*   Updated: 2021/12/12 15:16:32 by napark           ###   ########.fr       */
+/*   Created: 2021/12/30 00:19:36 by napark            #+#    #+#             */
+/*   Updated: 2021/12/30 00:19:40 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-	Returns a char pointer to the longest string in the double pointer array
-	Assumes that array ends with NULL to determin it's size.
-*/
 char	*ft_getlongeststr(char **array)
 {
 	int		max_len;

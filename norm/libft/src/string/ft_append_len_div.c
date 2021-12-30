@@ -5,19 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: napark <napark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/12 15:16:01 by napark            #+#    #+#             */
-/*   Updated: 2021/12/12 15:16:02 by napark           ###   ########.fr       */
+/*   Created: 2021/12/30 00:18:49 by napark            #+#    #+#             */
+/*   Updated: 2021/12/30 00:18:54 by napark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-will append len bytes of src to dst and free the old dst
-dst will be divided from src by div
-if dst/src == NULL or strlen(src)<len it returns NULL
-if a malloc-error happens it will free dst and return NULL
-*/
 char	*ft_append_len_div(char **dst, char *src, int len, char *div)
 {
 	int		i;
